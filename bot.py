@@ -19,7 +19,7 @@ async def on_message(message):
         return
 
     # only handle messages that start with the command symbol
-    if message.contents[0] != '!':
+    if message.content[0] != '!':
         return
 
     print('Received Message:')

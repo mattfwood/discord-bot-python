@@ -13,13 +13,8 @@ def decide(message):
 # get a random item from the top 20 items on a subreddit
 def subreddit(name):
     res = requests.get(
-        'https://www.reddit.com/r/{}/hot.json?limit=20'.format(name))
-    pp.pprint(res.json())
-
-
-def wholesome():
-    res = requests.get(
-        'https://www.reddit.com/r/wholesomeMemes/hot.json?limit=20')
-    pp.pprint(res.json())
-    # print(random.choice(res.json()['children']).data.url)
-    # return random.choice(res.json()['children']).data.url
+        'https://www.reddit.com/r/{}/hot.json?limit=20'.format(name),
+        headers={'User-agent': 'Bone-Bot-Discord'})
+    json = res.json()
+    random_url = random.choice(json['data']['children'])['data']['url']
+    return random_url

@@ -18,6 +18,8 @@ async def on_message(message):
     if message.author == client.user:
         return
 
+    print('Received Message:')
+    print(message.content)
     # get command name
     command = message.content.split(' ')[0].replace('!', '')
 
@@ -31,7 +33,9 @@ async def on_message(message):
     if method:
         # call command with message content
         reply = method(text)
-        print('method found')
+
+        print('Replying with:')
+        print(reply)
 
         # reply with command response
         await client.send_message(message.channel, reply)

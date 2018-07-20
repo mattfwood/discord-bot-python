@@ -31,12 +31,14 @@ async def on_message(message):
     if method:
         # call command with message content
         reply = method(text)
-        print("method found")
+        print('method found')
 
         # reply with command response
         await client.send_message(message.channel, reply)
 
     else:
+        reply = "{} isn't a command, dummy".format(command)
+        await client.send_message(message.channel, reply)
         pass
 
 client.run(os.getenv('DISCORD_TOKEN'))

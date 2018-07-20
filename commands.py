@@ -36,7 +36,9 @@ def goodboypoint(name):
         # check that user has a last_updated field
         last_updated = score[player]['last_updated']
         time_diff = int(current_minutes - last_updated)
-        if last_updated and (time_diff > 60):
+        # if it's been 60 minutes since last good boy point
+        if time_diff > 60:
+            # give them a point
             score[player]['points'] += 1
             score[player]['last_updated'] = current_minutes
         else:
@@ -50,6 +52,6 @@ def goodboypoint(name):
         json.dump(score, output)
 
     message = 'You gave {} one good boy point! Now they have {}.'.format(
-        player, score[player])
+        player, score[player]['points'])
 
     return message

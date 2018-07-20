@@ -18,6 +18,10 @@ async def on_message(message):
     if message.author == client.user:
         return
 
+    # only handle messages that start with the command symbol
+    if message.contents[0] != '!'
+        return
+
     print('Received Message:')
     print(message.content)
     # get command name

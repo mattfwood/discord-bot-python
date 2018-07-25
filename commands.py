@@ -4,6 +4,7 @@ import requests
 import pdb
 import json
 from time import time
+from point_system import all_players
 
 pp = pprint.PrettyPrinter(indent=4, depth=2)
 
@@ -15,8 +16,6 @@ def decide(message):
     return winner.strip()
 
 # get a random item from the top 20 items on a subreddit
-
-
 def subreddit(name):
     res = requests.get(
         'https://www.reddit.com/r/{}/hot.json?limit=20'.format(name),

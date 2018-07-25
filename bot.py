@@ -22,30 +22,30 @@ async def on_message(message):
     if message.content[0] != '!':
         return
 
-    print('Received Message:')
+    print('Received Message From {}:'.format(message.author))
     print(message.content)
     # get command name
-    command = message.content.split(' ')[0].replace('!', '')
+    command = message.content.split(' ')[0][1:]
 
     # get text after command
     text = message.content.split(command)[1].strip()
 
-    # get method to be called based on command
-    method = getattr(commands, command)
+    try:
+        # get method to be called based on command
+        method = getattr(commands, command)
 
-    # if valid method provided
-    if method:
-        # call command with message content
-        reply = method(text)
+        # if valid method provided
+        if method:
+            # call command with message content
+            reply = method(text, author=message.author)
 
-        print('Replying with:')
-        print(reply)
+            print('Replying with:')
+            print(reply)
 
-        # reply with command response
-        await client.send_message(message.channel, reply)
-
-    else:
-        reply = "{} isn't a command, dummy".format(command)
+            # reply with command response
+            await client.send_message(message.channel, reply)
+    except AttributeError:
+        reply = "'{}' isn't a command, dummy".format(command)
         await client.send_message(message.channel, reply)
         pass
 

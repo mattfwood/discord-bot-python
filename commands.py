@@ -30,6 +30,9 @@ def goodboypoint(input, message):
         message = add_point(member.name)
         return message
 
+def gbp(input, message):
+    return goodboypoint(input, message)
+
 def bet(input, message):
     amount = int(input)
     message = flip_coin(amount, message.author.name)

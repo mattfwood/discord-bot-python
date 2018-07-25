@@ -20,6 +20,9 @@ def get_score():
 
 
 def find_player(discord_id):
+    """
+    Find or create player from discord_id
+    """
     if discord_id in all_players:
         return all_players[discord_id]
     else:
@@ -33,6 +36,9 @@ def find_player(discord_id):
 
 
 def add_user(discord_id):
+    """
+    Initialize a new user with one point and return
+    """
     new_player = {
         'discord_id': discord_id,
         'points': 1,

@@ -1,6 +1,7 @@
+import random
+import pprint
 from time import time
 from firebase import firebase
-import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 firebase = firebase.FirebaseApplication(
@@ -16,6 +17,10 @@ for key, value in all_players.items():
 def get_score():
     pass
 
+def find_player(discord_id):
+    if discord_id in id_list:
+        player_index = id_list.index(discord_id)
+        return players_list[player_index]
 
 def add_user(discord_id):
     new_player = {
@@ -58,6 +63,25 @@ def point_available(player):
     else:
         return False
 
+def flip_coin(amount, player):
+    player = find_player(player)
+    points = player['points']
+    print(player)
+    # If the user has enough points to bet
+    if player['points'] >= amount:
+        win = random.choice([True, False])
+        if win:
+            # gain amount bet
+            player['points'] += amount
+            firebase.patch('/players/{}'.format(key), player)
+            return 'You won {} points! Now you have {}.'.format(amount, player['points'])
 
-# add_user('GreatBearShark#8830')
-add_point('GreatBearShark#8830')
+        else:
+            # lose amount
+            player['points'] -= amount
+            firebase.patch('/players/{}'.format(key), player)
+            return 'You lost {} points! Now you have {}.'.format(amount, player['points'])
+    else:
+        print('NOT ENOUGH POINTS')
+        return "You can't bet {} points, you only have {}!".format(amount, player['points'])
+

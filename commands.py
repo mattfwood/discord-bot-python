@@ -4,7 +4,7 @@ import requests
 import pdb
 import json
 from time import time
-from point_system import add_point
+from point_system import add_point, flip_coin
 
 pp = pprint.PrettyPrinter(indent=4, depth=2)
 
@@ -28,3 +28,11 @@ def subreddit(message, author):
 def goodboypoint(message, author):
     message = add_point(message)
     return message
+
+def bet(message, author):
+    amount = int(message)
+    message = flip_coin(amount, author['id'])
+    return message
+
+
+# print(bet(7, '@kiss me through the BONE'))

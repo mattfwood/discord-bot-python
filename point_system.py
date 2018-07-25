@@ -38,4 +38,4 @@ def add_point(discord_id):
             firebase.post('/players')
 
 
-add_user('GreatBearShark#8830')
+# add_user('GreatBearShark#8830')

@@ -20,9 +20,8 @@ def get_score():
 
 
 def find_player(discord_id):
-    if discord_id in id_list:
-        player_index = id_list.index(discord_id)
-        return players_list[player_index]
+    if discord_id in all_players:
+        return all_players[discord_id]
     else:
         new_player = {
             'discord_id': discord_id,

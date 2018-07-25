@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "06b9638860deb92ffe42c233fedd3a8e76ddf5bc042b19f898cfc7c842f72a5c"
+            "sha256": "c671c904b43f043204353169f1af3148e4310dcfc7d76cd000bafc9b92bf6fb8"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -28,6 +28,7 @@
                 "sha256:c579ec606f25b3f756f177fee6db344f8d7ef75cfc0603a94c9fa1d1c645789d",
                 "sha256:e1985766a4c83fcbdf7dde06544231fc9fb3de8929788179e623d6f9f9f321d2"
             ],
+            "markers": "python_version >= '3.4.1'",
             "version": "==1.0.5"
         },
         "async-timeout": {
@@ -35,6 +36,7 @@
                 "sha256:474d4bc64cee20603e225eb1ece15e248962958b45a3648a9f5cc29e827a610c",
                 "sha256:b3c0ddc416736619bd4a95ca31de8da6920c3b9a140c64dbef2b2fa7bf521287"
             ],
+            "markers": "python_version >= '3.5.3'",
             "version": "==3.0.0"
         },
         "certifi": {
@@ -81,6 +83,7 @@
                 "sha256:d870f399fcd58a1889e93008762a3b9a27cf7ea512818fc6e689f59495648355",
                 "sha256:e9404e2e19e901121c3c5c6cffd5a8ae0d1d67919c970e3b3262231175713068"
             ],
+            "markers": "python_version >= '3.4.1'",
             "version": "==4.3.1"
         },
         "python-dotenv": {
@@ -90,6 +93,13 @@
             ],
             "index": "pypi",
             "version": "==0.8.2"
+        },
+        "python-firebase": {
+            "hashes": [
+                "sha256:824b45947611325fab0c9c7ce6b15f0f31c387b7873a90664601c7427baede0f"
+            ],
+            "index": "pypi",
+            "version": "==1.2"
         },
         "requests": {
             "hashes": [
@@ -104,6 +114,7 @@
                 "sha256:a68ac5e15e76e7e5dd2b8f94007233e01effe3e50e8daddf69acfd81cb686baf",
                 "sha256:b5725a0bd4ba422ab0e66e89e030c806576753ea3ee08554382c14e685d117b5"
             ],
+            "markers": "python_version != '3.2.*' and python_version != '3.0.*' and python_version >= '2.6' and python_version < '4' and python_version != '3.1.*' and python_version != '3.3.*'",
             "version": "==1.23"
         },
         "websockets": {

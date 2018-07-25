@@ -21,7 +21,7 @@ def add_user(discord_id):
     new_player = {
         'discord_id': discord_id,
         'points': 1,
-        'last_updated': int(time())
+        'last_updated': int(time() / 60)
     }
     firebase.post('/players/', new_player)
     return 'You gave {} one good boy point! Now they have {}.'.format(
@@ -45,8 +45,7 @@ def add_point(discord_id):
             return "It's too soon to give another good boy point to {}! ({} minutes left)".format(player, (60 - time_diff))
     else:
         # Add user
-        print('USER NOT FOUND')
-        add_user(discord_id)
+        return add_user(discord_id)
 
 
 def point_available(player):

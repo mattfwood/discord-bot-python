@@ -4,9 +4,9 @@ from time import time
 from firebase import firebase
 pp = pprint.PrettyPrinter(indent=4)
 
-firebase = firebase.FirebaseApplication(
+fb = firebase.FirebaseApplication(
     'https://discord-bot-db.firebaseio.com', None)
-all_players = firebase.get('/players', None) or {}
+all_players = fb.get('/players', None) or {}
 players_list = []
 id_list = []
 
@@ -29,7 +29,7 @@ def find_player(discord_id):
             'points': 1,
             'last_updated': int(time() / 60)
         }
-        firebase.patch('/players/{}'.format(discord_id), new_player)
+        fb.patch('/players/{}'.format(discord_id), new_player)
         return new_player
 
 
@@ -39,7 +39,7 @@ def add_user(discord_id):
         'points': 1,
         'last_updated': int(time() / 60)
     }
-    firebase.patch('/players/{}'.format(discord_id), new_player)
+    fb.patch('/players/{}'.format(discord_id), new_player)
     return 'You gave {} one good boy point! Now they have {}.'.format(
         discord_id, 1)
 
@@ -52,7 +52,7 @@ def add_point(discord_id):
         if point_available(player):
             player['points'] += 1
             player['last_updated']=(time() / 60)
-            firebase.patch('/players/{}'.format(key), player)
+            fb.patch('/players/{}'.format(key), player)
             return 'You gave {} one good boy point! Now they have {}.'.format(
                 player, player['points'])
         else:
@@ -86,13 +86,13 @@ def flip_coin(amount, player_name):
         if win:
             # gain amount bet
             player['points'] += amount
-            firebase.patch('/players/{}'.format(player_name), player)
+            fb.patch('/players/{}'.format(player_name), player)
             return 'You won {} points! Now you have {}.'.format(amount, player['points'])
 
         else:
             # lose amount
             player['points'] -= amount
-            firebase.patch('/players/{}'.format(player_name), player)
+            fb.patch('/players/{}'.format(player_name), player)
             return 'You lost {} points! Now you have {}.'.format(amount, player['points'])
     else:
         print('NOT ENOUGH POINTS')

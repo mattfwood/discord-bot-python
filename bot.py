@@ -37,7 +37,7 @@ async def on_message(message):
         # if valid method provided
         if method:
             # call command with message content
-            reply = method(text, author=message.author)
+            reply = method(text, message=message)
 
             print('Replying with:')
             print(reply)

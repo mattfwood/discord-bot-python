@@ -4,7 +4,7 @@ import requests
 import pdb
 import json
 from time import time
-from point_system import all_players
+from point_system import add_point
 
 pp = pprint.PrettyPrinter(indent=4, depth=2)
 
@@ -26,31 +26,28 @@ def subreddit(name):
 
 
 def goodboypoint(name):
-    player = name.lower()
-    json_data = open('./score.json').read()
-    score = json.loads(json_data)
-    current_minutes = (time() / 60)
+    add_point(name)
 
-    if player in score:
-        # check that user has a last_updated field
-        last_updated = score[player]['last_updated']
-        time_diff = int(current_minutes - last_updated)
-        # if it's been 60 minutes since last good boy point
-        if time_diff > 60:
-            # give them a point
-            score[player]['points'] += 1
-            score[player]['last_updated'] = current_minutes
-        else:
-            print("It's too soon to give another good boy point to {}! ({} minutes left)".format(
-                player, (60 - time_diff)))
-            return "It's too soon to give another good boy point to {}! ({} minutes left)".format(player, (60 - time_diff))
-    else:
-        score[player] = {"points": 1, "last_updated": current_minutes}
+    # if player in score:
+    #     # check that user has a last_updated field
+    #     last_updated = score[player]['last_updated']
+    #     time_diff = int(current_minutes - last_updated)
+    #     # if it's been 60 minutes since last good boy point
+    #     if time_diff > 60:
+    #         # give them a point
+    #         score[player]['points'] += 1
+    #         score[player]['last_updated'] = current_minutes
+    #     else:
+    #         print("It's too soon to give another good boy point to {}! ({} minutes left)".format(
+    #             player, (60 - time_diff)))
+    #         return "It's too soon to give another good boy point to {}! ({} minutes left)".format(player, (60 - time_diff))
+    # else:
+    #     score[player] = {"points": 1, "last_updated": current_minutes}
 
-    with open('./score.json', 'w') as output:
-        json.dump(score, output)
+    # with open('./score.json', 'w') as output:
+    #     json.dump(score, output)
 
-    message = 'You gave {} one good boy point! Now they have {}.'.format(
-        player, score[player]['points'])
+    # message = 'You gave {} one good boy point! Now they have {}.'.format(
+    #     player, score[player]['points'])
 
-    return message
+    # return message

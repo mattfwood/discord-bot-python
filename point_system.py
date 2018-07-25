@@ -27,7 +27,7 @@ def find_player(discord_id):
             'points': 1,
             'last_updated': int(time() / 60)
         }
-        firebase.patch('/players/{}'.format(discord_id, new_player)
+        firebase.patch('/players/{}'.format(discord_id), new_player)
         return new_player
 
 def add_user(discord_id):

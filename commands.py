@@ -25,6 +25,6 @@ def subreddit(name, author):
     return random_url
 
 
-def goodboypoint(name):
+def goodboypoint(name, author):
     message = add_point(name)
     return message

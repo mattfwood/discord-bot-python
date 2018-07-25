@@ -16,15 +16,15 @@ def decide(message, author):
     return winner.strip()
 
 # get a random item from the top 20 items on a subreddit
-def subreddit(name, author):
+def subreddit(message, author):
     res = requests.get(
-        'https://www.reddit.com/r/{}/hot.json?limit=20'.format(name),
+        'https://www.reddit.com/r/{}/hot.json?limit=20'.format(message),
         headers={'User-agent': 'Bone-Bot-Discord'})
     json = res.json()
     random_url = random.choice(json['data']['children'])['data']['url']
     return random_url
 
 
-def goodboypoint(name, author):
-    message = add_point(name)
+def goodboypoint(message, author):
+    message = add_point(message)
     return message

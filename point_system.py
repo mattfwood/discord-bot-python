@@ -82,13 +82,13 @@ def flip_coin(amount, player_name):
         if win:
             # gain amount bet
             player['points'] += amount
-            firebase.patch('/players/{}'.format(key), player)
+            firebase.patch('/players/{}'.format(player_name), player)
             return 'You won {} points! Now you have {}.'.format(amount, player['points'])
 
         else:
             # lose amount
             player['points'] -= amount
-            firebase.patch('/players/{}'.format(key), player)
+            firebase.patch('/players/{}'.format(player_name), player)
             return 'You lost {} points! Now you have {}.'.format(amount, player['points'])
     else:
         print('NOT ENOUGH POINTS')

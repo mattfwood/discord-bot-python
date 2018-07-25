@@ -31,7 +31,7 @@ def goodboypoint(message, author):
 
 def bet(message, author):
     amount = int(message)
-    message = flip_coin(amount, author['id'])
+    message = flip_coin(amount, author.name)
     return message
 
 

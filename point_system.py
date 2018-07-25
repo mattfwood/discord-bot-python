@@ -21,6 +21,14 @@ def find_player(discord_id):
     if discord_id in id_list:
         player_index = id_list.index(discord_id)
         return players_list[player_index]
+    else:
+        new_player = {
+            'discord_id': discord_id,
+            'points': 1,
+            'last_updated': int(time() / 60)
+        }
+        firebase.post('/players/', new_player)
+        return new_player
 
 def add_user(discord_id):
     new_player = {
@@ -64,6 +72,7 @@ def point_available(player):
         return False
 
 def flip_coin(amount, player):
+    pp.pprint(player)
     player = find_player(player)
     points = player['points']
     print(player)

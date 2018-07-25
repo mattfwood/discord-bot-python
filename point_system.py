@@ -27,7 +27,7 @@ def find_player(discord_id):
             'points': 1,
             'last_updated': int(time() / 60)
         }
-        firebase.post('/players/', new_player)
+        firebase.patch('/players/{}'.format(discord_id, new_player)
         return new_player
 
 def add_user(discord_id):
@@ -36,7 +36,7 @@ def add_user(discord_id):
         'points': 1,
         'last_updated': int(time() / 60)
     }
-    firebase.post('/players/', new_player)
+    firebase.patch('/players/{}'.format(discord_id), new_player)
     return 'You gave {} one good boy point! Now they have {}.'.format(
         discord_id, 1)
 

@@ -24,7 +24,8 @@ async def on_message(message):
     if message.content[0] != '!':
         return
 
-    print('Received Message From {}:'.format(message.author))
+    message_sender = message.author
+    print(f'Received Message From {message_sender}:')
     print(message.content)
     # get command name
     command = message.content.split(' ')[0][1:]
@@ -47,7 +48,7 @@ async def on_message(message):
             # reply with command response
             await client.send_message(message.channel, reply)
     except AttributeError:
-        reply = "'{}' isn't a command, dummy".format(command)
+        reply = f"'{command}' isn't a command, dummy"
         await client.send_message(message.channel, reply)
         pass
 

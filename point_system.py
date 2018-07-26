@@ -30,7 +30,7 @@ def find_player(discord_id):
             'points': 1,
             'last_updated': int(current_minutes)
         }
-        fb.patch('/players/{}'.format(discord_id), new_player)
+        fb.patch(f'/players/{discord_id}', new_player)
         return new_player
 
 
@@ -43,9 +43,8 @@ def add_user(discord_id):
         'points': 1,
         'last_updated': int(current_minutes)
     }
-    fb.patch('/players/{}'.format(discord_id), new_player)
-    return 'You gave {} one good boy point! Now they have {}.'.format(
-        discord_id, 1)
+    fb.patch(f'/players/{discord_id}', new_player)
+    return f'You gave {discord_id} one good boy point! Now they have {1}.'
 
 
 def add_point(discord_id):
@@ -63,7 +62,9 @@ def add_point(discord_id):
         else:
             current_minutes = (current_minutes)
             time_diff = int(current_minutes - player['last_updated'])
-            return "It's too soon to give another good boy point to {}! ({} minutes left)".format(player['discord_id'], (5 - time_diff))
+            player_name = player['discord_id']
+            minutes_left = 5 - time_diff
+            return f"It's too soon to give another good boy point to {player_name}! ({minutes_left} minutes left)"
     else:
         # Add user
         return add_user(discord_id)
@@ -89,19 +90,20 @@ def flip_coin(amount, player_name):
         if win:
             # gain amount bet
             player['points'] += amount
-            fb.patch('/players/{}'.format(player_name), player)
-            return 'Winner! You won {} points! Now you have {}.'.format(amount, player['points'])
+            fb.patch(f'/players/{player_name}', player)
+            player_points = player['points']
+            return f'Winner! You won {amount} points! Now you have {player_points}.'
 
         else:
             # lose amount
             player['points'] -= amount
-            fb.patch('/players/{}'.format(player_name), player)
+            fb.patch(f'/players/{player_name}', player)
             player_points = player['points']
-            insult = random.choice(['stinky loser', 'honking goose', 'squawking duck', 'unbelievable fool'])
+            insult = random.choice(
+                ['stinky loser', 'honking goose', 'squawking duck', 'unbelievable fool'])
             return f'You {insult}. You lost {amount} points! Now you have {player_points}.'
     else:
-        print('NOT ENOUGH POINTS')
         if amount < 0:
             return "You can't bet negative points!"
         else:
-            return (f"You can't bet {amount} points, you only have {player['points']}!")
+            return f"You can't bet {amount} points, you only have {player['points']}!"

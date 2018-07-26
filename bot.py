@@ -5,12 +5,14 @@ import commands
 
 client = discord.Client()
 
+
 @client.event
 async def on_ready():
     print('Logged in as')
     print(client.user.name)
     print(client.user.id)
     print('------')
+
 
 @client.event
 async def on_message(message):
@@ -50,13 +52,3 @@ async def on_message(message):
         pass
 
 client.run(os.getenv('DISCORD_TOKEN'))
-
-
-# input = "!decide one, two, three"
-
-# # get command name
-# command = input.split(' ')[0].replace('!', '')
-
-# # get text after command
-# message = input.split(command)[1].strip()
-# print(commands.decide(message))

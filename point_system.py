@@ -83,8 +83,6 @@ def point_available(player):
 def flip_coin(amount, player_name):
     pp.pprint(player_name)
     player = find_player(player_name)
-    points = player['points']
-    print(player)
     # If the user has enough points to bet
     if player['points'] >= amount:
         win = random.choice([True, False])

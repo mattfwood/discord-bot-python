@@ -20,9 +20,7 @@ def get_score():
 
 
 def find_player(discord_id):
-    """
-    Find or create player from discord_id
-    """
+    # Find or create player from discord_id
     if discord_id in all_players:
         return all_players[discord_id]
     else:
@@ -84,7 +82,7 @@ def flip_coin(amount, player_name):
     pp.pprint(player_name)
     player = find_player(player_name)
     # If the user has enough points to bet
-    if player['points'] >= amount:
+    if 0 <= amount <= player['points']:
         win = random.choice([True, False])
         if win:
             # gain amount bet
@@ -99,4 +97,7 @@ def flip_coin(amount, player_name):
             return 'You stinky loser. You lost {} points! Now you have {}.'.format(amount, player['points'])
     else:
         print('NOT ENOUGH POINTS')
-        return "You can't bet {} points, you only have {}!".format(amount, player['points'])
+        if amount < 0:
+            return "You can't bet negative points!"
+        else:
+            return (f"You can't bet {amount} points, you only have {player['points']}!")

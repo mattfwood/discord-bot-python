@@ -43,3 +43,8 @@ def bet(input, message):
     amount = int(input)
     message = flip_coin(amount, message.author.name)
     return message
+
+def zalgo(input, message):
+    return 'Ḫ̨̢͎̭̹̼E̷̗̞͟ ̶̧͚̼̥͙̪͝C͟҉̹̠O̧͎͍͈̺͟͜ͅM̦͡E̥̱̖͔̮̩S̷̝̙͚̼͍̜͘'
+
+

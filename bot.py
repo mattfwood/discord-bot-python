@@ -48,8 +48,12 @@ async def on_message(message):
             # reply with command response
             await client.send_message(message.channel, reply)
     except AttributeError:
-        reply = f"'{command}' isn't a command, dummy"
-        await client.send_message(message.channel, reply)
-        pass
+        # only handle error if command has at least character
+        # to ignore '!' messages
+        if len(command) is not 0:
+            reply = f"'{command}' isn't a command, dummy"
+            await client.send_message(message.channel, reply)
+            pass
+
 
 client.run(os.getenv('DISCORD_TOKEN'))

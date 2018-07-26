@@ -99,4 +99,7 @@ def flip_coin(amount, player_name):
             return 'You stinky loser. You lost {} points! Now you have {}.'.format(amount, player['points'])
     else:
         print('NOT ENOUGH POINTS')
-        return "You can't bet {} points, you only have {}!".format(amount, player['points'])
+        if amount < 0:
+            return "You can't bet negative points!"
+        else:
+            return (f"You can't bet {amount} points, you only have {player['points']}!")

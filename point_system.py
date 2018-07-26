@@ -56,7 +56,7 @@ def add_point(discord_id):
             player['points'] += 1
             player['last_updated'] = (current_minutes)
             fb.patch(f'/players/{key}', player)
-            player_name = player['discord-id']
+            player_name = player['discord_id']
             player_points = player['points']
             return f'You gave {player_name} one good boy point! Now they have {player_points}.'
         else:

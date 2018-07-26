@@ -60,7 +60,6 @@ def add_point(discord_id):
             player_points = player['points']
             return f'You gave {player_name} one good boy point! Now they have {player_points}.'
         else:
-            current_minutes = (current_minutes)
             time_diff = int(current_minutes - player['last_updated'])
             player_name = player['discord_id']
             minutes_left = 5 - time_diff
@@ -72,7 +71,6 @@ def add_point(discord_id):
 
 def point_available(player):
     last_updated = player['last_updated']
-    current_minutes = (current_minutes)
     time_diff = int(current_minutes - last_updated)
 
     if time_diff > 5:

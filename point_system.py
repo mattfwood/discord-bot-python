@@ -9,6 +9,7 @@ fb = firebase.FirebaseApplication(
 all_players = fb.get('/players', None) or {}
 players_list = []
 id_list = []
+current_minutes = time() / 60
 
 for key, value in all_players.items():
     players_list.append(value)
@@ -27,7 +28,7 @@ def find_player(discord_id):
         new_player = {
             'discord_id': discord_id,
             'points': 1,
-            'last_updated': int(time() / 60)
+            'last_updated': int(current_minutes)
         }
         fb.patch('/players/{}'.format(discord_id), new_player)
         return new_player
@@ -40,7 +41,7 @@ def add_user(discord_id):
     new_player = {
         'discord_id': discord_id,
         'points': 1,
-        'last_updated': int(time() / 60)
+        'last_updated': int(current_minutes)
     }
     fb.patch('/players/{}'.format(discord_id), new_player)
     return 'You gave {} one good boy point! Now they have {}.'.format(
@@ -54,15 +55,15 @@ def add_point(discord_id):
         # Check if points are on cooldown
         if point_available(player):
             player['points'] += 1
-            player['last_updated'] = (time() / 60)
+            player['last_updated'] = (current_minutes)
             fb.patch(f'/players/{key}', player)
             player_name = player['discord-id']
             player_points = player['points']
             return f'You gave {player_name} one good boy point! Now they have {player_points}.'
         else:
-            current_minutes = (time() / 60)
+            current_minutes = (current_minutes)
             time_diff = int(current_minutes - player['last_updated'])
-            return "It's too soon to give another good boy point to {}! ({} minutes left)".format(player['discord_id'], (60 - time_diff))
+            return "It's too soon to give another good boy point to {}! ({} minutes left)".format(player['discord_id'], (5 - time_diff))
     else:
         # Add user
         return add_user(discord_id)
@@ -70,10 +71,10 @@ def add_point(discord_id):
 
 def point_available(player):
     last_updated = player['last_updated']
-    current_minutes = (time() / 60)
+    current_minutes = (current_minutes)
     time_diff = int(current_minutes - last_updated)
 
-    if time_diff > 60:
+    if time_diff > 5:
         return True
     else:
         return False

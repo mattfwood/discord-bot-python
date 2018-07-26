@@ -20,18 +20,18 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    # only handle messages that start with the command symbol
-    if message.content[0] != '!':
+    # only handle non-blank messages that start with the command symbol
+    if message.content[0] is not '!' or len(message.content) is 0:
         return
 
     message_sender = message.author
     print(f'Received Message From {message_sender}:')
     print(message.content)
     # get command name
-    command = message.content.split(' ')[0][1:]
+    command = message.content.split(' ')[0][1:] or ''
 
     # get text after command
-    text = message.content.split(command)[1].strip()
+    text = message.content.split(command)[1].strip() or ''
 
     try:
         # get method to be called based on command

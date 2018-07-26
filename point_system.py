@@ -55,9 +55,10 @@ def add_point(discord_id):
         if point_available(player):
             player['points'] += 1
             player['last_updated'] = (time() / 60)
-            fb.patch('/players/{}'.format(key), player)
-            return 'You gave {} one good boy point! Now they have {}.'.format(
-                player, player['points'])
+            fb.patch(f'/players/{key}', player)
+            player_name = player['discord-id']
+            player_points = player['points']
+            return f'You gave {player_name} one good boy point! Now they have {player_points}.'
         else:
             current_minutes = (time() / 60)
             time_diff = int(current_minutes - player['last_updated'])

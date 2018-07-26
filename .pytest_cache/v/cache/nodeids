@@ -1,0 +1,4 @@
+[
+  "tests/test_decide.py::test_standard",
+  "tests/test_decide.py::test_single"
+]

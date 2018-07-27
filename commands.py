@@ -39,9 +39,12 @@ def gbp(input, message):
 
 
 def bet(input, message):
-    amount = int(input)
-    message = flip_coin(amount, message.author.name)
-    return message
+    try:
+        amount = int(input)
+        message = flip_coin(amount, message.author.name)
+        return message
+    except ValueError:
+        return "what the"
 
 
 def zalgo(input, message):

@@ -47,7 +47,7 @@ def buy_item(discord_id, item_name):
     if item:
         # Check that user has enough points
         player = find_player(discord_id)
-        if player['points'] > item['price']:
+        if player['points'] >= item['price']:
             # Buy item
             print('BUY ITEM')
             # add item to inventory

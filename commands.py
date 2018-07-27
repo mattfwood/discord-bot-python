@@ -49,8 +49,8 @@ def bet(input, message):
 
 def store(input, message):
     items = ['Big Boy Belt']
-    if len(input) is 0:
-        return items.join('\n')
+    return items.join('\n')
+    # if len(input) is 0:
 
 
 def zalgo(input, message):

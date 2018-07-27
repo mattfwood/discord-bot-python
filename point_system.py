@@ -6,13 +6,17 @@ pp = pprint.PrettyPrinter(indent=4)
 
 fb = firebase.FirebaseApplication(
     'https://discord-bot-db.firebaseio.com', None)
-all_players = fb.get('/players', None) or {}
-players_list = []
-id_list = []
+# all_players = fb.get('/players', None) or {}
+# players_list = []
+# id_list = []
 
-for key, value in all_players.items():
-    players_list.append(value)
-    id_list.append(value['discord_id'])
+# for key, value in all_players.items():
+#     players_list.append(value)
+#     id_list.append(value['discord_id'])
+
+
+def get_players():
+    return fb.get('/players', None) or {}
 
 
 def get_score():
@@ -20,6 +24,7 @@ def get_score():
 
 
 def find_player(discord_id):
+    all_players = get_players()
     # Find or create player from discord_id
     if discord_id in all_players:
         return all_players[discord_id]

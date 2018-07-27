@@ -51,7 +51,7 @@ def bet(input, message):
 def store(input, message):
     item_list = []
     for item in items:
-        item_entry = f"{item['cost']} - {item['name']}: {item['description']}"
+        item_entry = f"{item['price']} - {item['name']}: {item['description']}"
         item_list.append(item_entry)
     return '\n'.join(item_list)
 

@@ -39,7 +39,7 @@ def buy_item(discord_id, item_name):
                 player['items'].append(item['name'])
             else:
                 player['items'] = [item['name']]
-            # deduct cost from points
+            # deduct price from points
             player['points'] -= item['price']
             # update user
             fb.patch(f"/players/{player['discord_id']}", player)

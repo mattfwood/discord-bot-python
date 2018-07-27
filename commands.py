@@ -4,7 +4,7 @@ import requests
 import pdb
 import json
 from time import time
-from point_system import add_point, flip_coin
+from point_system import add_point, flip_coin, find_player
 from item_system import items, buy_item
 
 pp = pprint.PrettyPrinter(indent=4, depth=2)
@@ -27,6 +27,11 @@ def reddit(input, message):
         return random_url
     except IndexError:
         return 'Subreddit not found'
+
+
+def points(input, message):
+    player = find_player(message.author.name)
+    return f"You have {player['points']} points, pal."
 
 
 def goodboypoint(input, message):

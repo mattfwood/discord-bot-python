@@ -53,6 +53,7 @@ def store(input, message):
         'description': 'Prevents you from going under 10 points',
         'cost': 50
     },
+        {
         'name': 'Good Boy Point Machine',
         'description': 'Generates one good boy point per minute',
         'cost': 100

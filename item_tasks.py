@@ -9,4 +9,6 @@ def add_point_task(discord_id):
     point incrementing items and give them that many points
     """
     players = fb.get('/players', None)
+    # for player in players:
+
     pass

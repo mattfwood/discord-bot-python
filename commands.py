@@ -49,11 +49,17 @@ def bet(input, message):
 
 
 def store(input, message):
+    if input == '':
     item_list = []
     for item in items:
         item_entry = f"{item['cost']} - {item['name']}: {item['description']}"
         item_list.append(item_entry)
     return '\n'.join(item_list)
+
+
+def buy(input, message):
+    message = buy_item(message.author.name, input)
+    return message
 
 
 def zalgo(input, message):

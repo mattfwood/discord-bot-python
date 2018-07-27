@@ -6,13 +6,6 @@ pp = pprint.PrettyPrinter(indent=4)
 
 fb = firebase.FirebaseApplication(
     'https://discord-bot-db.firebaseio.com', None)
-# all_players = fb.get('/players', None) or {}
-# players_list = []
-# id_list = []
-
-# for key, value in all_players.items():
-#     players_list.append(value)
-#     id_list.append(value['discord_id'])
 
 
 def get_players():
@@ -55,6 +48,17 @@ def add_user(discord_id):
     return f'You gave {discord_id} one good boy point! Now they have {1}.'
 
 
+def update_points(player, value):
+    # TODO: Add item check
+    if 'items' in player:
+        # If the user's new value is less than 10
+        if 'Good Boy Belt' in player['items'] and value < 10:
+            # Reset it to 10
+            value = 10
+    player['points'] = value
+    fb.patch(f"/players/{player['discord_id']}", player)
+
+
 def add_point(discord_id):
     all_players = get_players()
     if discord_id in all_players:
@@ -62,12 +66,12 @@ def add_point(discord_id):
         player = all_players[discord_id]
         # Check if points are on cooldown
         if point_available(player):
-            player['points'] += 1
-            player['last_updated'] = (current_minutes)
-            fb.patch(f'/players/{discord_id}', player)
-            player_name = player['discord_id']
-            player_points = player['points']
-            return f'You gave {player_name} one good boy point! Now they have {player_points}.'
+            new_total = player['points'] + 1
+            update_points(player, new_total)
+            # player['points'] += 1
+            # player['last_updated'] = (current_minutes)
+            # fb.patch(f'/players/{discord_id}', player)
+            return f"You gave {player['discord_id']} one good boy point! Now they have {new_total}."
         else:
             time_diff = int(current_minutes - player['last_updated'])
             player_name = player['discord_id']
@@ -97,23 +101,22 @@ def flip_coin(amount, player_name):
         win = random.choice([True, False])
         if win:
             # gain amount bet
-            player['points'] += amount
-            fb.patch(f'/players/{player_name}', player)
-            player_points = player['points']
-            return f'<:poggers:471769534903353364> Winner! You won {amount} points! Now you have {player_points}.'
+            new_total = player['points'] + amount
+            update_points(player, new_total)
+            # player_points = player['points']
+            return f'<:poggers:471769534903353364> Winner! You won {amount} points! Now you have {new_total}.'
 
         else:
             # lose amount
-            player['points'] -= amount
-            fb.patch(f'/players/{player_name}', player)
-            player_points = player['points']
+            new_total = player['points'] - amount
+            update_points(player, new_total)
             insult = random.choice(
                 ['stinky loser',
                  'honking goose',
                  'squawking duck',
                  'unbelievable fool',
                  'little baby'])
-            return f'You {insult}. You lost {amount} points! Now you have {player_points}.'
+            return f'You {insult}. You lost {amount} points! Now you have {new_total}.'
     else:
         if amount < 0:
             return "You can't bet negative points!"

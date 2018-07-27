@@ -1,14 +1,53 @@
+from point_system import find_player
+from firebase import firebase
+fb = firebase.FirebaseApplication(
+    'https://discord-bot-db.firebaseio.com', None)
+
 items = [{
-    'name': 'Big Boy Belt',
+    'name': 'Good Boy Belt',
     'description': 'Prevents you from going under 10 points',
-    'cost': 50
+    'price': 50
 },
     {
     'name': 'Good Boy Point Machine',
         'description': 'Generates one good boy point per minute',
-        'cost': 100
+        'price': 100
 }]
 
 
+def validate_item(item_name):
+    for item in items:
+        if item['name'] == item_name:
+            return item
+
+    return False
+
+
 def buy_item(discord_id, item_name):
-    pass
+    item_name_lowercase = item_name.lower()
+    # Check if item name is valid
+    item = validate_item(item_name_lowercase)
+
+    if item:
+        # Check that user has enough points
+        player = find_player(discord_id)
+        if player['points'] > item['price']:
+            # Buy item
+            print('BUY ITEM')
+            # add item to inventory
+            if 'items' in player:
+                player['items'].append(item['name'])
+            else:
+                player['items'] = [item['name']]
+            # deduct cost from points
+            player['points'] -= item['price']
+            # update user
+            fb.patch(f"/players/{player['discord_id']}", player)
+        else:
+            return f"You can't afford {item_name} ({item['price']} points)!. You only have {player['points']}"
+    else:
+        return f"{item_name} isn't an item!"
+
+
+if __name__ == "__main__":
+    buy_item('GreatBearShark', 'Good Boy Point Machine')

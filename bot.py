@@ -21,7 +21,7 @@ async def on_message(message):
         return
 
     # only handle non-blank messages that start with the command symbol
-    if message.content[0] is not '!' or len(message.content) is 0:
+    if len(message.content) is 0 or message.content[0] is not '!':
         return
 
     message_sender = message.author

@@ -106,7 +106,11 @@ def flip_coin(amount, player_name):
             fb.patch(f'/players/{player_name}', player)
             player_points = player['points']
             insult = random.choice(
-                ['stinky loser', 'honking goose', 'squawking duck', 'unbelievable fool'])
+                ['stinky loser',
+                 'honking goose',
+                 'squawking duck',
+                 'unbelievable fool',
+                 'little baby'])
             return f'You {insult}. You lost {amount} points! Now you have {player_points}.'
     else:
         if amount < 0:

@@ -31,7 +31,9 @@ def reddit(input, message):
 
 def inventory(input, message):
     player = find_player(message.author.name)
+    # player = find_player('ded-guy')
     items = ', '.join(player['items'])
+    print(items)
     return f"Inventory: {items}"
 
 
@@ -74,3 +76,16 @@ def buy(input, message):
 
 def zalgo(input, message):
     return 'Ḫ̨̢͎̭̹̼E̷̗̞͟ ̶̧͚̼̥͙̪͝C͟҉̹̠O̧͎͍͈̺͟͜ͅM̦͡E̥̱̖͔̮̩S̷̝̙͚̼͍̜͘'
+
+
+if __name__ == "__main__":
+    # message = {
+    #     'author': {
+    #         'name': 'GreatBearShark'
+    #     }
+    # }
+    # message = {
+    #     'author': {}
+    # }
+    # message.author.name = 'GreatBearShark'
+    # inventory('', 'GreatBearShark')

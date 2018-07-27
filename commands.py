@@ -78,14 +78,14 @@ def zalgo(input, message):
     return 'Ḫ̨̢͎̭̹̼E̷̗̞͟ ̶̧͚̼̥͙̪͝C͟҉̹̠O̧͎͍͈̺͟͜ͅM̦͡E̥̱̖͔̮̩S̷̝̙͚̼͍̜͘'
 
 
-if __name__ == "__main__":
-    # message = {
-    #     'author': {
-    #         'name': 'GreatBearShark'
-    #     }
-    # }
-    # message = {
-    #     'author': {}
-    # }
-    # message.author.name = 'GreatBearShark'
-    # inventory('', 'GreatBearShark')
+# if __name__ == "__main__":
+#     # message = {
+#     #     'author': {
+#     #         'name': 'GreatBearShark'
+#     #     }
+#     # }
+#     # message = {
+#     #     'author': {}
+#     # }
+#     # message.author.name = 'GreatBearShark'
+#     # inventory('', 'GreatBearShark')

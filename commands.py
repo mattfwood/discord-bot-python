@@ -48,7 +48,8 @@ def bet(input, message):
 
 
 def store(input, message):
-    return 'STORE'
+    items = ['Big Boy Belt']
+    return items.join(' ')
 
 
 def zalgo(input, message):

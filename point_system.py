@@ -33,7 +33,8 @@ def find_player(discord_id):
         new_player = {
             'discord_id': discord_id,
             'points': 1,
-            'last_updated': int(current_minutes)
+            'last_updated': int(current_minutes),
+            'items': []
         }
         fb.patch(f'/players/{discord_id}', new_player)
         return new_player
@@ -47,7 +48,8 @@ def add_user(discord_id):
     new_player = {
         'discord_id': discord_id,
         'points': 1,
-        'last_updated': int(current_minutes)
+        'last_updated': int(current_minutes),
+        'items': []
     }
     fb.patch(f'/players/{discord_id}', new_player)
     return f'You gave {discord_id} one good boy point! Now they have {1}.'

@@ -29,6 +29,12 @@ def reddit(input, message):
         return 'Subreddit not found'
 
 
+def items(input, message):
+    player = find_player(message.author.name)
+    items = ', '.join(player['items'])
+    return f"Inventory: {items}"
+
+
 def points(input, message):
     player = find_player(message.author.name)
     return f"You have {player['points']} points, pal."

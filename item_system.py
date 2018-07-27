@@ -43,6 +43,7 @@ def buy_item(discord_id, item_name):
             player['points'] -= item['price']
             # update user
             fb.patch(f"/players/{player['discord_id']}", player)
+            return f"You bought {item_name}! Now you have {player['points']} points."
         else:
             return f"You can't afford {item_name} ({item['price']} points)!. You only have {player['points']}"
     else:

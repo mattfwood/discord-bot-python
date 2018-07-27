@@ -9,7 +9,7 @@ items = [{
     'price': 50
 },
     {
-    'name': 'Good Boy Point Machine',
+    'name': 'Point Machine',
         'description': 'Generates one good boy point per minute',
         'price': 100
 }]
@@ -17,7 +17,7 @@ items = [{
 
 def validate_item(item_name):
     for item in items:
-        if item['name'] == item_name:
+        if item['name'].lower() == item_name:
             return item
 
     return False

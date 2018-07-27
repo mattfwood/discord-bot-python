@@ -47,5 +47,8 @@ def bet(input, message):
         return "what the"
 
 
+def store(input, message):
+
+
 def zalgo(input, message):
     return 'Ḫ̨̢͎̭̹̼E̷̗̞͟ ̶̧͚̼̥͙̪͝C͟҉̹̠O̧͎͍͈̺͟͜ͅM̦͡E̥̱̖͔̮̩S̷̝̙͚̼͍̜͘'

@@ -4,7 +4,7 @@ import asyncio
 import commands
 from raven import Client
 
-client = Client(
+raven_client = Client(
     'https://3a4591b085414cf4853854b0dd92348a:21dead98a66e405494a4cb328f530c00@sentry.io/1250949')
 
 client = discord.Client()
@@ -59,7 +59,7 @@ async def on_message(message):
             await client.send_message(message.channel, reply)
             pass
     except Exception:
-        client.captureException()
+        raven_client.captureException()
 
 
 client.run(os.getenv('DISCORD_TOKEN'))

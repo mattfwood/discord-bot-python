@@ -54,10 +54,10 @@ def add_user(discord_id):
 
 
 def add_point(discord_id):
-    if discord_id in id_list:
+    all_players = get_players()
+    if discord_id in all_players:
         current_minutes = time() / 60
-        player_index = id_list.index(discord_id)
-        player = players_list[player_index]
+        player = all_players[discord_id]
         # Check if points are on cooldown
         if point_available(player):
             player['points'] += 1

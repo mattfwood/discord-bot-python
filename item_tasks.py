@@ -12,7 +12,7 @@ def add_point_task(discord_id):
     players = fb.get('/players', None)
     for key, player in players.items():
         if 'Point Machine' in player['items']:
-            point_amount = player['items'].count('Point Machine')
+            point_amount = player['items'].count('Point Machine') * 2
             print(f"Giving {point_amount} points to {player['discord_id']}")
             new_total = player['points'] + point_amount
             update_points(player, new_total)

@@ -51,14 +51,16 @@ async def on_message(message):
 
             # reply with command response
             await client.send_message(message.channel, reply)
-    except AttributeError:
+    except AttributeError as e:
         # only handle error if command has at least character
         # to ignore '!' messages
+        print(repr(e))
         if len(command) is not 0:
             reply = f"'{command}' isn't a command, dummy"
             await client.send_message(message.channel, reply)
             pass
-    except Exception:
+    except Exception as e:
+        print(repr(e))
         raven_client.captureException()
 
 

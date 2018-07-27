@@ -48,7 +48,7 @@ def add_user(discord_id):
     return f'You gave {discord_id} one good boy point! Now they have {1}.'
 
 
-def update_points(player, value):
+def update_points(player, value, cooldown=False):
     # TODO: Add item check
     if 'items' in player:
         # If the user's new value is less than 10
@@ -56,6 +56,9 @@ def update_points(player, value):
             # Reset it to 10
             value = 10
     player['points'] = value
+    if cooldown:
+        current_minutes = time() / 60
+        player['last_updated'] = (current_minutes)
     fb.patch(f"/players/{player['discord_id']}", player)
 
 
@@ -67,10 +70,11 @@ def add_point(discord_id):
         # Check if points are on cooldown
         if point_available(player):
             new_total = player['points'] + 1
-            update_points(player, new_total)
-            # player['points'] += 1
-            # player['last_updated'] = (current_minutes)
-            # fb.patch(f'/players/{discord_id}', player)
+            # set point cooldown as well
+            update_points(player, new_total, cooldown=True)
+
+            player['last_updated'] = (current_minutes)
+            fb.patch(f'/players/{discord_id}', player)
             return f"You gave {player['discord_id']} one good boy point! Now they have {new_total}."
         else:
             time_diff = int(current_minutes - player['last_updated'])

@@ -15,7 +15,7 @@ def decide(input: str, message) -> str:
     return winner.strip()
 
 
-def subreddit(input, message):
+def reddit(input, message):
     try:
         # Get a random item from the top 20 items on a subreddit
         res = requests.get(
@@ -48,9 +48,20 @@ def bet(input, message):
 
 
 def store(input, message):
-    items = ['Big Boy Belt => Prevents you from going under 10 points',
-             'Good Boy Boy Point Machine => Generates one good boy point per minute']
-    return '\n'.join(items)
+    items = [{
+        'name': 'Big Boy Belt',
+        'description': 'Prevents you from going under 10 points',
+        'cost': 50
+    },
+        'name': 'Good Boy Point Machine',
+        'description': 'Generates one good boy point per minute',
+        'cost': 100
+    }]
+    item_list = []
+    for item in items:
+        item_entry = f'{item[' cost ']} - {item[' name ']}: {item[' description ']}'
+        item_list.append(item_entry)
+    return '\n'.join(item_list)
 
 
 def zalgo(input, message):

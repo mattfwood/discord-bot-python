@@ -10,7 +10,7 @@ def add_point_task(discord_id):
     point incrementing items and give them that many points
     """
     players = fb.get('/players', None)
-    for player in players:
+    for key, player in players.items():
         if 'Point Machine' in player['items']:
             point_amount = player['items'].count('Point Machine')
             print(f"Giving {point_amount} points to {player['discord_id']}")
@@ -18,3 +18,7 @@ def add_point_task(discord_id):
             update_points(player, new_total)
 
     pass
+
+
+if __name__ == '__main__':
+    add_point_task('GreatBearShark')

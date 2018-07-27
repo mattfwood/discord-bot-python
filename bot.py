@@ -2,6 +2,10 @@ import os
 import discord
 import asyncio
 import commands
+from raven import Client
+
+client = Client(
+    'https://3a4591b085414cf4853854b0dd92348a:21dead98a66e405494a4cb328f530c00@sentry.io/1250949')
 
 client = discord.Client()
 
@@ -16,24 +20,24 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    # prevent bot from replying to self
-    if message.author == client.user:
-        return
-
-    # only handle non-blank messages that start with the command symbol
-    if len(message.content) is 0 or message.content[0] is not '!':
-        return
-
-    message_sender = message.author
-    print(f'Received Message From {message_sender}:')
-    print(message.content)
-    # get command name
-    command = message.content.split(' ')[0][1:] or ''
-
-    # get text after command
-    text = message.content.split(command)[1].strip() or ''
-
     try:
+        # prevent bot from replying to self
+        if message.author == client.user:
+            return
+
+        # only handle non-blank messages that start with the command symbol
+        if len(message.content) is 0 or message.content[0] is not '!':
+            return
+
+        message_sender = message.author
+        print(f'Received Message From {message_sender}:')
+        print(message.content)
+        # get command name
+        command = message.content.split(' ')[0][1:] or ''
+
+        # get text after command
+        text = message.content.split(command)[1].strip() or ''
+
         # get method to be called based on command
         method = getattr(commands, command)
 
@@ -54,6 +58,8 @@ async def on_message(message):
             reply = f"'{command}' isn't a command, dummy"
             await client.send_message(message.channel, reply)
             pass
+    except Exception:
+        client.captureException()
 
 
 client.run(os.getenv('DISCORD_TOKEN'))

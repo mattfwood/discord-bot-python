@@ -13,6 +13,7 @@ def add_point_task(discord_id):
     for player in players:
         if 'Point Machine' in player['items']:
             point_amount = player['items'].count('Point Machine')
+            print(f"Giving {point_amount} points to {player['discord_id']}")
             new_total = player['points'] + point_amount
             update_points(player, new_total)
 

@@ -49,7 +49,6 @@ def bet(input, message):
 
 
 def store(input, message):
-    if input == '':
     item_list = []
     for item in items:
         item_entry = f"{item['cost']} - {item['name']}: {item['description']}"

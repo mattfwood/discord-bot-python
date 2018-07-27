@@ -98,7 +98,7 @@ def flip_coin(amount, player_name):
             player['points'] += amount
             fb.patch(f'/players/{player_name}', player)
             player_points = player['points']
-            return f'":poggers:" Winner! You won {amount} points! Now you have {player_points}.'
+            return f'<:poggers:471769534903353364> Winner! You won {amount} points! Now you have {player_points}.'
 
         else:
             # lose amount

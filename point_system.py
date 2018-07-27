@@ -9,7 +9,6 @@ fb = firebase.FirebaseApplication(
 all_players = fb.get('/players', None) or {}
 players_list = []
 id_list = []
-current_minutes = time() / 60
 
 for key, value in all_players.items():
     players_list.append(value)
@@ -25,6 +24,7 @@ def find_player(discord_id):
     if discord_id in all_players:
         return all_players[discord_id]
     else:
+        current_minutes = time() / 60
         new_player = {
             'discord_id': discord_id,
             'points': 1,
@@ -38,6 +38,7 @@ def add_user(discord_id):
     """
     Initialize a new user with one point and return
     """
+    current_minutes = time() / 60
     new_player = {
         'discord_id': discord_id,
         'points': 1,
@@ -49,6 +50,7 @@ def add_user(discord_id):
 
 def add_point(discord_id):
     if discord_id in id_list:
+        current_minutes = time() / 60
         player_index = id_list.index(discord_id)
         player = players_list[player_index]
         # Check if points are on cooldown
@@ -70,6 +72,7 @@ def add_point(discord_id):
 
 
 def point_available(player):
+    current_minutes = time() / 60
     last_updated = player['last_updated']
     time_diff = int(current_minutes - last_updated)
 

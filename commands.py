@@ -48,8 +48,9 @@ def bet(input, message):
 
 
 def store(input, message):
-    items = ['Big Boy Belt']
-    return items.join('\n')
+    return 'STORE'
+    # items = ['Big Boy Belt']
+    # return items.join('\n')
     # if len(input) is 0:
 
 

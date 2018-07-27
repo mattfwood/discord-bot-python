@@ -12,7 +12,23 @@ items = [{
     'name': 'Point Machine',
         'description': 'Generates one good boy point per minute',
         'price': 100
+},
+    {
+    'name': 'Skateboard',
+    'description': 'Holy shit',
+    'price': 5000
 }]
+
+items_dict = {
+    'Good Boy Belt': {
+        'description': 'Prevents you from going under 10 points',
+        'price': 50
+    },
+    'Point Machine': {
+        'description': 'Generates one good boy point per minute',
+        'price': 100
+    }
+}
 
 
 def validate_item(item_name):

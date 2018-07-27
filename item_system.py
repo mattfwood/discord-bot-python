@@ -10,7 +10,7 @@ items = [{
 },
     {
     'name': 'Point Machine',
-        'description': 'Generates one good boy point every 5 minutes',
+        'description': 'Generates one good boy point every 10 minutes',
         'price': 100
 },
     {

@@ -31,18 +31,18 @@ def reddit(input, message):
 
 def inventory(input, message):
     print('Getting inventory...')
-    # player = find_player(message.author.name)
-    player = find_player('GreatBearShark')
+    player = find_player(message.author.name)
+    # player = find_player('GreatBearShark')
     player_items = player['items']
     item_list = []
+    output = []
     print(item_list)
     for item in items:
-        print('all items:')
         print(item)
         print(player_items)
         if item['name'] in player_items:
             print(item)
-            message.append(f"{item}: {player_items['items'].count(item)}")
+            output.append(f"{item}: {player_items['items'].count(item)}")
 
     # player_items = ', '.join(player['items'])
     # print(player_items)

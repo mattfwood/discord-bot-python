@@ -30,11 +30,17 @@ def reddit(input, message):
 
 
 def inventory(input, message):
-    player = find_player(message.author.name)
+    print('Getting inventory...')
+    # player = find_player(message.author.name)
+    player = find_player('GreatBearShark')
     player_items = player['items']
     item_list = []
+    print(item_list)
     for item in items:
+        print('all items:')
+        print(items)
         if item in player_items:
+            print(item)
             message.append(f"{item}: {player_items['items'].count(item)}")
 
     # player_items = ', '.join(player['items'])
@@ -84,14 +90,5 @@ def zalgo(input, message):
     return 'Ḫ̨̢͎̭̹̼E̷̗̞͟ ̶̧͚̼̥͙̪͝C͟҉̹̠O̧͎͍͈̺͟͜ͅM̦͡E̥̱̖͔̮̩S̷̝̙͚̼͍̜͘'
 
 
-# if __name__ == "__main__":
-#     # message = {
-#     #     'author': {
-#     #         'name': 'GreatBearShark'
-#     #     }
-#     # }
-#     # message = {
-#     #     'author': {}
-#     # }
-#     # message.author.name = 'GreatBearShark'
-#     # inventory('', 'GreatBearShark')
+if __name__ == "__main__":
+    inventory('beep', 'boop')

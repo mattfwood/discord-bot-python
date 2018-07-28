@@ -38,7 +38,8 @@ def inventory(input, message):
     print(item_list)
     for item in items:
         print('all items:')
-        print(items)
+        print(item)
+        print(player_items)
         if item in player_items:
             print(item)
             message.append(f"{item}: {player_items['items'].count(item)}")

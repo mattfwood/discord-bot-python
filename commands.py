@@ -31,10 +31,16 @@ def reddit(input, message):
 
 def inventory(input, message):
     player = find_player(message.author.name)
-    # player = find_player('ded-guy')
-    items = ', '.join(player['items'])
-    print(items)
-    return f"Inventory: {items}"
+    player_items = player['items']
+    item_list = []
+    for item in items:
+        if item in player_items:
+            message.append(f'{item}: {player_items[item].count(item)}')
+
+    # player_items = ', '.join(player['items'])
+    # print(player_items)
+    message = '\n'.join(item_list)
+    return f"Inventory: \n {message}"
 
 
 def points(input, message):

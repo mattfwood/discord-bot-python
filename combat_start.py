@@ -15,6 +15,8 @@ start_time = time.time()
 @client.event
 async def on_ready():
     print('Starting Combat Event')
+    # Reset all previous counters to be safe
+    fb.delete(f'/encounters', None)
     enemy = random_encounter()
     message = f"{enemy['name']} appears! ({enemy['health']} attack)"
     channels = client.get_all_channels()

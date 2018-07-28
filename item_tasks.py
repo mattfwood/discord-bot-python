@@ -16,6 +16,7 @@ def add_point_task(discord_id):
             print(f"Giving {point_amount} points to {player['discord_id']}")
             new_total = player['points'] + point_amount
             update_points(player, new_total)
+            client.close()
 
     pass
 

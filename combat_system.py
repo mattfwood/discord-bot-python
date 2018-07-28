@@ -21,6 +21,14 @@ enemies = [
   {
     'name': 'Big Clown',
     'health': 48,
+  },
+  {
+    'name': 'Peanut Pete',
+    'health': 81
+  },
+  {
+    'name': 'Emotionally Unavailable Eddy',
+    'health': 99
   }
 ]
 
@@ -37,7 +45,8 @@ def add_to_attacked(discord_id):
     encounter_key = encounters_list[0]
     encounter = encounters[encounter_key]
     if 'attacked' in encounter:
-        encounter['attacked'] = encounter['attacked'].append(discord_id)
+        print(type(encounter['attacked']))
+        encounter['attacked'].append(discord_id)
     else:
         encounter['attacked'] = [discord_id]
     fb.patch(f'/encounters/{encounter_key}', encounter)
@@ -85,4 +94,5 @@ def get_reward(health):
 if __name__ == '__main__':
     # random_encounter()
     # attack('nothing')
-    print(attack_enemy('GreatBearShark'))
+    # print(attack_enemy('GreatBearShark'))
+    add_to_attacked('GreatBearShark')

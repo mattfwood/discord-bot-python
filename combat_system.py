@@ -85,7 +85,11 @@ def attack_enemy(discord_id):
             # Find player and update points
             new_total = player['points'] + reward
             update_points(player, new_total)
-            message = f"You rolled {attack} and defeated {encounter['name']}! You get {reward} points."
+            weapon_text = ''
+            # Conditionally add text if player has weapon
+            if 'Nightmare Sword' in player['items']:
+                weapon_text = '(+10 from Nightmare Sword)'
+            message = f"You rolled {attack} {weapon_text} and defeated {encounter['name']}! You get {reward} points."
             add_to_attacked(discord_id)
             return message
         else:

@@ -44,6 +44,7 @@ def add_to_attacked(discord_id):
 
 def attack_enemy(discord_id):
     encounters = fb.get('/encounters', None)
+    print(encounters)
     encounters_list = list(encounters.keys())
     # Check if there's an encounter
     if len(encounters_list) != 0:

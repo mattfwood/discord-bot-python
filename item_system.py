@@ -3,21 +3,28 @@ from firebase import firebase
 fb = firebase.FirebaseApplication(
     'https://discord-bot-db.firebaseio.com', None)
 
-items = [{
-    'name': 'Good Boy Belt',
-    'description': 'Prevents you from going under 10 points',
-    'price': 50
-},
+items = [
     {
-    'name': 'Point Machine',
+        'name': 'Good Boy Belt',
+        'description': 'Prevents you from going under 10 points',
+        'price': 50
+    },
+    {
+        'name': 'Point Machine',
         'description': 'Generates one good boy point every 10 minutes',
         'price': 100
-},
+    },
     {
-    'name': 'Skateboard',
-    'description': 'Holy shit',
-    'price': 5000
-}]
+        'name': 'Nightmare Sword',
+        'description': 'Get +10 damage to your rolls. Made from real nightmares.'
+        'price': 1000
+    },
+    {
+        'name': 'Skateboard',
+        'description': 'Holy shit',
+        'price': 5000
+    }
+]
 
 items_dict = {
     'Good Boy Belt': {

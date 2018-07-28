@@ -27,6 +27,10 @@ async def on_ready():
             encounter['started_at'] = start_time
             encounter['attacked'] = []
             await fb.patch(f'/encounters/{enemy["name"]}', encounter)
+            # wait 10 minutes
+            time.sleep(600)
+            await client.send_message(channel, f"{enemy['name']} ran away!")
+            await fb.delete(f'/encounters/{enemy["name"]}', encounter)
             client.close()
 
 client.run(os.getenv('DISCORD_TOKEN'))

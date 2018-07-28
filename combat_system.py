@@ -67,7 +67,7 @@ def attack_enemy(discord_id):
             add_to_attacked(discord_id)
             return message
       else:
-        return "You've already attacked!"
+        return f"You've already attacked {encounters_list[0]}"
     else:
         return "There's no encounter right now!"
 

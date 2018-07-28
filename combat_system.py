@@ -29,6 +29,18 @@ enemies = [
   {
     'name': 'Emotionally Unavailable Eddy',
     'health': 99
+  },
+  {
+    'name': 'Big Bad Boy',
+    'health': 55
+  },
+  {
+    'name': 'Ultra Edison',
+    'health': 89
+  },
+  {
+    'name': 'Meatball Marinara',
+    'health': 64
   }
 ]
 

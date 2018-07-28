@@ -35,14 +35,13 @@ def inventory(input, message):
     # player = find_player('GreatBearShark')
     player_items = player['items']
     item_list = []
-    output = []
     print(item_list)
     for item in items:
         print(item)
         print(player_items)
         if item['name'] in player_items:
             print(item)
-            output.append(f"{item}: {item['name'].count(item['name'])}")
+            item_list.append(f"{item}: {item['name'].count(item['name'])}")
 
     # player_items = ', '.join(player['items'])
     # print(player_items)

@@ -6,6 +6,7 @@ import json
 from time import time
 from point_system import add_point, flip_coin, find_player
 from item_system import items, buy_item
+from combat_system import attack_enemy
 
 pp = pprint.PrettyPrinter(indent=4, depth=2)
 
@@ -85,6 +86,9 @@ def buy(input, message):
     message = buy_item(message.author.name, input)
     return message
 
+def attack(input, message):
+    message = attack_enemy(message.author.name)
+    return message
 
 def zalgo(input, message):
     return 'Ḫ̨̢͎̭̹̼E̷̗̞͟ ̶̧͚̼̥͙̪͝C͟҉̹̠O̧͎͍͈̺͟͜ͅM̦͡E̥̱̖͔̮̩S̷̝̙͚̼͍̜͘'

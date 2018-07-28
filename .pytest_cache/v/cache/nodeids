@@ -1,6 +1,0 @@
-[
-  "tests/test_decide.py::test_standard",
-  "tests/test_decide.py::test_single",
-  "tests/test_subreddit.py::test_subreddit",
-  "tests/test_subreddit.py::test_invalid"
-]

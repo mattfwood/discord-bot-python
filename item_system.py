@@ -16,7 +16,7 @@ items = [
     },
     {
         'name': 'Nightmare Sword',
-        'description': 'Get +10 damage to your rolls. Made from real nightmares.'
+        'description': 'Get +10 damage to your rolls. Made from real nightmares.',
         'price': 1000
     },
     {

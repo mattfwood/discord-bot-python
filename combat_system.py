@@ -75,6 +75,10 @@ def attack_enemy(discord_id):
       if 'attacked' not in encounter or discord_id not in encounter['attacked']:
         attack = choice(range(1, 100))
         player = find_player(discord_id)
+        # If player has sword
+        if 'Nightmare Sword' in player['items']:
+            # Add 10 to attack
+            attack += 10
         if attack > encounter['health']:
             # Calculate reward based on enemy health
             reward = get_reward(encounter['health'])

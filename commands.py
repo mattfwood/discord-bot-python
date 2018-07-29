@@ -97,5 +97,3 @@ def zalgo(input, message):
 
 if __name__ == "__main__":
     # inventory('beep', 'boop')
-    from . import decide
-    print(decide)

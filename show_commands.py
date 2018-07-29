@@ -15,7 +15,5 @@ def show_commands():
           command_list.append(f"**{name}**: {description}")
 
   message = '\n'.join(command_list)
+  print(message)
   return message
-
-if __name__ == '__main__':
-    print(show_commands())

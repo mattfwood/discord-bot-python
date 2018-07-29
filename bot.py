@@ -43,7 +43,8 @@ async def on_message(message):
         print(f'COMMAND: {command}')
         if command == 'commands':
             print('SHOWING COMMANDS')
-            return show_commands()
+            reply = show_commands()
+            await client.send_message(message.channel, reply)
 
         # get method to be called based on command
         method = getattr(commands, command)

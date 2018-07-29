@@ -16,7 +16,7 @@ def get_score():
     pass
 
 
-def find_player(discord_id):
+def find_player(discord_id: str):
     all_players = get_players()
     # Find or create player from discord_id
     if discord_id in all_players:
@@ -33,7 +33,7 @@ def find_player(discord_id):
         return new_player
 
 
-def add_user(discord_id):
+def add_user(discord_id: str) -> str:
     """
     Initialize a new user with one point and return
     """
@@ -48,7 +48,7 @@ def add_user(discord_id):
     return f'You gave {discord_id} one good boy point! Now they have {1}.'
 
 
-def update_points(player, value, cooldown=False):
+def update_points(player, value: int, cooldown: bool = False) -> None:
     # TODO: Add item check
     if 'items' in player:
         # If the user's new value is less than 10
@@ -62,7 +62,7 @@ def update_points(player, value, cooldown=False):
     fb.patch(f"/players/{player['discord_id']}", player)
 
 
-def add_point(discord_id):
+def add_point(discord_id: str) -> str:
     all_players = get_players()
     if discord_id in all_players:
         current_minutes = time() / 60
@@ -86,7 +86,7 @@ def add_point(discord_id):
         return add_user(discord_id)
 
 
-def point_available(player):
+def point_available(player) -> bool:
     current_minutes = time() / 60
     last_updated = player['last_updated']
     time_diff = int(current_minutes - last_updated)
@@ -97,7 +97,7 @@ def point_available(player):
         return False
 
 
-def flip_coin(amount, player_name):
+def flip_coin(amount: int, player_name: str) -> str:
     pp.pprint(player_name)
     player = find_player(player_name)
     # If the user has enough points to bet

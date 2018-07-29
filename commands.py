@@ -42,17 +42,17 @@ def inventory(input, message):
         print(player_items)
         if item['name'] in player_items:
             print(item)
-            item_list.append(f"{item['name'].strip()}: {player_items.count(item['name'])}")
+            item_list.append(f"**{item['name'].strip()}**: {player_items.count(item['name'])}")
 
     # player_items = ', '.join(player['items'])
     # print(player_items)
     output = '\n'.join(item_list)
-    return f"Inventory: \n {output}"
+    return f"__**Inventory:**__ \n {output}"
 
 
 def points(input, message):
     player = find_player(message.author.name)
-    return f"You have {player['points']} points, pal."
+    return f"You have **{player['points']}** points, pal."
 
 
 def goodboypoint(input, message):

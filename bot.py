@@ -60,13 +60,14 @@ async def on_message(message):
             # reply with command response
             await client.send_message(message.channel, reply)
     except Exception as e:
+        print('EXCEPTION:')
+        print(repr(e))
         # Catch errors that are invalid commands
         if command not in commands.__dict__:
             reply = f"'{command}' isn't a command, dummy"
             await client.send_message(message.channel, reply)
         else:
             # Otherwise report real errors
-            print(repr(e))
             raven_client.captureException()
 
 

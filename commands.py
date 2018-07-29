@@ -7,7 +7,6 @@ from item_system import items, buy_item
 from combat_system import attack_enemy
 
 
-
 def decide(input: str, message) -> str:
     """`[List of Options]` Pick a random item from a list, separated by commas"""
     winner = random.choice(input.split(','))
@@ -35,7 +34,8 @@ def inventory(input, message):
     player_items = player['items']
     item_list = []
     for item in player_items:
-        item_list.append(f"__{item['name'].strip()}__: {player_items[item['name']]}")
+        item_list.append(
+            f"__{item['name'].strip()}__: {player_items[item['name']]}")
 
     # player_items = ', '.join(player['items'])
     # print(player_items)
@@ -85,15 +85,17 @@ def buy(input, message):
     message = buy_item(message.author.name, input)
     return message
 
+
 def attack(input, message):
     """Attack the current enemy if an encounter is active"""
     message = attack_enemy(message.author.name)
     return message
+
 
 def zalgo(input, message):
     """Uh oh"""
     return 'Ḫ̨̢͎̭̹̼E̷̗̞͟ ̶̧͚̼̥͙̪͝C͟҉̹̠O̧͎͍͈̺͟͜ͅM̦͡E̥̱̖͔̮̩S̷̝̙͚̼͍̜͘'
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     # inventory('beep', 'boop')

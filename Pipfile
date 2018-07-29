@@ -10,10 +10,14 @@ python-dotenv = "*"
 python-firebase = "*"
 pytest = "*"
 raven = "*"
+"flake8" = "*"
+"flake8-mypy" = "*"
+mypy = "*"
 
 [dev-packages]
 "autopep8" = "*"
 pylint = "*"
+"flake8" = "*"
 
 [requires]
 python_version = "3.6"

@@ -1,6 +1,5 @@
 import os
 import discord
-import asyncio
 import commands
 from raven import Client
 from show_commands import show_commands
@@ -39,7 +38,8 @@ async def on_message(message):
         # get text after command
         text = message.content.split(command)[1].strip() or ''
 
-        # First check if user is asking for command list to avoid cyclical dependencies
+        # Check if user is asking for command list
+        # (to avoid cyclical dependencies)
         print(f'COMMAND: {command}')
         if command == 'commands':
             print('SHOWING COMMANDS')

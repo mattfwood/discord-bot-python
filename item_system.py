@@ -1,5 +1,6 @@
 import re
 import string
+from typing import Union
 from point_system import find_player
 from firebase import firebase
 fb = firebase.FirebaseApplication(
@@ -40,7 +41,7 @@ items_dict = {
 }
 
 
-def validate_item(item_name):
+def validate_item(item_name: str):
     for item in items:
         if item['name'].lower() == item_name:
             return item
@@ -48,16 +49,19 @@ def validate_item(item_name):
     return False
 
 
-def has_digit(input):
+def has_digit(input: str) -> bool:
     return any(char.isdigit() for char in input)
 
-def get_quantity(input):
+
+def get_quantity(input: str) -> int:
     return int(input.strip(string.ascii_letters + ' '))
 
-def get_name(input):
+
+def get_name(input: str) -> str:
     return input.strip(string.digits + ' ')
 
-def buy_item(discord_id, item_name):
+
+def buy_item(discord_id: str, item_name: str):
     quantity = 1
     # If the item name has a digit, they want more than one
     if has_digit(item_name):
@@ -84,7 +88,7 @@ def buy_item(discord_id, item_name):
                     player['items'][item['name']] = quantity
                 # player['items'].append(item['name'])
             else:
-                player['items'] = { item['name']: quantity }
+                player['items'] = {item['name']: quantity}
             # deduct price from points for each one bought
             player['points'] -= item['price'] * quantity
             # update user

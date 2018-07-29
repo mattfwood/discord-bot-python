@@ -47,7 +47,7 @@ def inventory(input, message):
     # player_items = ', '.join(player['items'])
     # print(player_items)
     output = '\n'.join(item_list)
-    return f"__**Inventory:**__ \n {output}"
+    return f"__**Inventory:**__\n{output}"
 
 
 def points(input, message):

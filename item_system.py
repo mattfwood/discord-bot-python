@@ -59,7 +59,15 @@ def buy_item(discord_id, item_name):
             print('BUY ITEM')
             # add item to inventory
             if 'items' in player:
-                player['items'].append(item['name'])
+                # if the player already has this item
+                if item['name'] in player['items']:
+                    # add one quantity
+                    item_name = item['name']
+                    player['items'][item['name']] += 1
+                else:
+                    # otherwise set it to 1
+                    player['items'][item['name']] = 1
+                # player['items'].append(item['name'])
             else:
                 player['items'] = [item['name']]
             # deduct price from points
@@ -74,4 +82,4 @@ def buy_item(discord_id, item_name):
 
 
 if __name__ == "__main__":
-    buy_item('GreatBearShark', 'Good Boy Point Machine')
+    print(buy_item('GreatBearShark', 'Point Machine'))

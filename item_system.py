@@ -1,6 +1,4 @@
-import re
 import string
-from typing import Union
 from point_system import find_player
 from firebase import firebase
 fb = firebase.FirebaseApplication(
@@ -28,17 +26,6 @@ items = [
         'price': 5000
     }
 ]
-
-items_dict = {
-    'Good Boy Belt': {
-        'description': 'Prevents you from going under 10 points',
-        'price': 50
-    },
-    'Point Machine': {
-        'description': 'Generates one good boy point per minute',
-        'price': 100
-    }
-}
 
 
 def validate_item(item_name: str):

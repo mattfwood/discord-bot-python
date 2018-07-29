@@ -45,15 +45,12 @@ enemies = [
 ]
 
 
-def random_encounter():
-    enemy = choice(enemies)
-    # print(enemy_name)
-    encounter = enemy
-    print(encounter.keys())
+def random_encounter() -> dict:
+    encounter = choice(enemies)
     return encounter
 
 
-def add_to_attacked(discord_id):
+def add_to_attacked(discord_id: str):
     encounters = fb.get('/encounters', None)
     encounters_list = list(encounters.keys())
     encounter_key = encounters_list[0]
@@ -66,9 +63,8 @@ def add_to_attacked(discord_id):
     fb.patch(f'/encounters/{encounter_key}', encounter)
 
 
-def attack_enemy(discord_id):
+def attack_enemy(discord_id: str) -> str:
     encounters = fb.get('/encounters', None)
-    print(encounters)
     encounters_list = list(encounters.keys())
     # Check if there's an encounter
     if len(encounters_list) != 0:
@@ -107,14 +103,8 @@ def attack_enemy(discord_id):
     else:
         return "There's no encounter right now!"
 
-# def attack_success(discord_id):
 
-
-def end_encounter(client):
-    client.close()
-
-
-def get_reward(health):
+def get_reward(health: int) -> int:
     base = health * 2
     modifier = choice(range(-20, 20))
     return base + modifier

@@ -26,7 +26,7 @@ def reddit(input, message):
         return 'Subreddit not found'
 
 
-def inventory(input, message):
+def inventory(input, message) -> str:
     """List the items in your inventory"""
     player = find_player(message.author.name)
     # player = find_player('GreatBearShark')
@@ -41,13 +41,13 @@ def inventory(input, message):
     return f"**Inventory:**\n{output}"
 
 
-def points(input, message):
+def points(input, message) -> str:
     """Get your current number of points"""
     player = find_player(message.author.name)
     return f"You have **{player['points']}** points, pal."
 
 
-def goodboypoint(input, message):
+def goodboypoint(input, message) -> str:
     """`{Discord Name}` Give one point to a person of your choice"""
     for member in message.mentions:
         message = add_point(member.name)
@@ -59,7 +59,7 @@ def gbp(input, message):
     return goodboypoint(input, message)
 
 
-def bet(input, message):
+def bet(input: str, message) -> str:
     """`{Bet Amount}` Place a 50/50 bet with a certain number of points"""
     try:
         amount = int(input)
@@ -78,19 +78,19 @@ def store(input, message):
     return '\n'.join(item_list)
 
 
-def buy(input, message):
+def buy(input, message) -> str:
     """`{Item Name}` Buy an item by name from the store. Use !store to see items"""
     message = buy_item(message.author.name, input)
     return message
 
 
-def attack(input, message):
+def attack(input, message) -> str:
     """Attack the current enemy if an encounter is active"""
     message = attack_enemy(message.author.name)
     return message
 
 
-def zalgo(input, message):
+def zalgo(input, message) -> str:
     """Uh oh"""
     return 'Ḫ̨̢͎̭̹̼E̷̗̞͟ ̶̧͚̼̥͙̪͝C͟҉̹̠O̧͎͍͈̺͟͜ͅM̦͡E̥̱̖͔̮̩S̷̝̙͚̼͍̜͘'
 

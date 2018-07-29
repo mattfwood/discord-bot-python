@@ -3,6 +3,7 @@ import discord
 import asyncio
 import commands
 from raven import Client
+from show_commands import show_commands
 
 raven_client = Client(
     'https://3a4591b085414cf4853854b0dd92348a:21dead98a66e405494a4cb328f530c00@sentry.io/1250949')
@@ -41,6 +42,10 @@ async def on_message(message):
         # get method to be called based on command
         method = getattr(commands, command)
 
+        # First check if user is asking for command list to avoid cyclical dependencies
+        if command is 'commands':
+            return show_commands()
+
         # if valid method provided
         if method:
             # call command with message content
@@ -51,17 +56,15 @@ async def on_message(message):
 
             # reply with command response
             await client.send_message(message.channel, reply)
-    except AttributeError as e:
-        # only handle error if command has at least character
-        # to ignore '!' messages
-        print(repr(e))
-        if len(command) is not 0:
+    except Exception as e:
+        # Catch errors that are invalid commands
+        if command not in commands.__dict__:
             reply = f"'{command}' isn't a command, dummy"
             await client.send_message(message.channel, reply)
-            pass
-    except Exception as e:
-        print(repr(e))
-        raven_client.captureException()
+        else:
+            # Otherwise report real errors
+            print(repr(e))
+            raven_client.captureException()
 
 
 client.run(os.getenv('DISCORD_TOKEN'))

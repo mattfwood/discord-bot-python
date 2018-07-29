@@ -61,7 +61,7 @@ def get_name(input: str) -> str:
     return input.strip(string.digits + ' ')
 
 
-def buy_item(discord_id: str, item_name: str):
+def buy_item(discord_id: str, item_name: str) -> str:
     quantity = 1
     # If the item name has a digit, they want more than one
     if has_digit(item_name):

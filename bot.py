@@ -43,7 +43,9 @@ async def on_message(message):
         method = getattr(commands, command)
 
         # First check if user is asking for command list to avoid cyclical dependencies
+        print(f'COMMAND: {command}')
         if command == 'commands':
+            print('SHOWING COMMANDS')
             return show_commands()
 
         # if valid method provided

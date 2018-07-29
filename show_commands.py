@@ -12,7 +12,7 @@ def show_commands():
 
       if not_built_in and valid_name and is_function:
           description = command.__doc__
-          command_list.append(f"`**{name.uppercase()}**: {description}`")
+          command_list.append(f"`**{name.upper()}**: {description}`")
 
   message = '\n'.join(command_list)
   print(message)

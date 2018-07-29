@@ -39,14 +39,14 @@ async def on_message(message):
         # get text after command
         text = message.content.split(command)[1].strip() or ''
 
-        # get method to be called based on command
-        method = getattr(commands, command)
-
         # First check if user is asking for command list to avoid cyclical dependencies
         print(f'COMMAND: {command}')
         if command == 'commands':
             print('SHOWING COMMANDS')
             return show_commands()
+
+        # get method to be called based on command
+        method = getattr(commands, command)
 
         # if valid method provided
         if method:

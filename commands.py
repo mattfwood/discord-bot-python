@@ -9,13 +9,13 @@ from combat_system import attack_enemy
 
 
 def decide(input: str, message) -> str:
-    """Pick a random item from a list, separated by commas"""
+    """*[List of Options]* Pick a random item from a list, separated by commas"""
     winner = random.choice(input.split(','))
     return winner.strip()
 
 
 def reddit(input, message):
-    """Get a random item from the top 20 items on a subreddit"""
+    """*{Subreddit Name}* Get a random item from the top 20 items on a subreddit"""
     try:
         res = requests.get(
             f'https://www.reddit.com/r/{input}/hot.json?limit=20',
@@ -50,7 +50,7 @@ def points(input, message):
 
 
 def goodboypoint(input, message):
-    """Give one point to a person of your choice"""
+    """*{Discord Name}* Give one point to a person of your choice"""
     for member in message.mentions:
         message = add_point(member.name)
         return message
@@ -62,7 +62,7 @@ def gbp(input, message):
 
 
 def bet(input, message):
-    """Place a 50/50 bet with a certain number of points"""
+    """*{Bet Amount}* Place a 50/50 bet with a certain number of points"""
     try:
         amount = int(input)
         message = flip_coin(amount, message.author.name)
@@ -81,7 +81,7 @@ def store(input, message):
 
 
 def buy(input, message):
-    """Buy an item by name from the store. Use !store to see items"""
+    """*{Item Name}* Buy an item by name from the store. Use !store to see items"""
     message = buy_item(message.author.name, input)
     return message
 

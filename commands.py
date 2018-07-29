@@ -36,18 +36,13 @@ def inventory(input, message):
     # player = find_player('GreatBearShark')
     player_items = player['items']
     item_list = []
-    print(item_list)
-    for item in items:
-        print(item)
-        print(player_items)
-        if item['name'] in player_items:
-            print(item)
-            item_list.append(f"**{item['name'].strip()}**: {player_items.count(item['name'])}")
+    for item in player_items:
+        item_list.append(f"__{item['name'].strip()}__: {player_items[item['name']]}")
 
     # player_items = ', '.join(player['items'])
     # print(player_items)
     output = '\n'.join(item_list)
-    return f"__**Inventory:**__\n{output}"
+    return f"**Inventory:**\n{output}"
 
 
 def points(input, message):

@@ -1,3 +1,5 @@
+import re
+import string
 from point_system import find_player
 from firebase import firebase
 fb = firebase.FirebaseApplication(
@@ -46,7 +48,22 @@ def validate_item(item_name):
     return False
 
 
+def has_digit(input):
+    return any(char.isdigit() for char in input)
+
+def get_quantity(input):
+    return int(input.strip(string.ascii_letters + ' '))
+
+def get_name(input):
+    return input.strip(string.digits + ' ')
+
 def buy_item(discord_id, item_name):
+    quantity = 1
+    # If the item name has a digit, they want more than one
+    if has_digit(item_name):
+        quantity = get_quantity(item_name)
+        item_name = get_name(item_name)
+
     item_name_lowercase = item_name.lower()
     # Check if item name is valid
     item = validate_item(item_name_lowercase)
@@ -54,27 +71,25 @@ def buy_item(discord_id, item_name):
     if item:
         # Check that user has enough points
         player = find_player(discord_id)
-        if player['points'] >= item['price']:
-            # Buy item
-            print('BUY ITEM')
+        if player['points'] >= (item['price'] * quantity):
             # add item to inventory
             if 'items' in player:
                 # if the player already has this item
                 if item['name'] in player['items']:
                     # add one quantity
                     item_name = item['name']
-                    player['items'][item['name']] += 1
+                    player['items'][item['name']] += quantity
                 else:
                     # otherwise set it to 1
-                    player['items'][item['name']] = 1
+                    player['items'][item['name']] = quantity
                 # player['items'].append(item['name'])
             else:
-                player['items'] = [item['name']]
-            # deduct price from points
-            player['points'] -= item['price']
+                player['items'] = { item['name']: quantity }
+            # deduct price from points for each one bought
+            player['points'] -= item['price'] * quantity
             # update user
             fb.patch(f"/players/{player['discord_id']}", player)
-            return f"You bought a {item_name}! Now you have {player['points']} point(s)."
+            return f"You bought {quantity} {item_name}(s)! Now you have {player['points']} point(s)."
         else:
             return f"You can't afford {item_name} ({item['price']} points)!. You only have {player['points']}"
     else:
@@ -82,4 +97,4 @@ def buy_item(discord_id, item_name):
 
 
 if __name__ == "__main__":
-    print(buy_item('GreatBearShark', 'Point Machine'))
+    print(buy_item('GreatBearShark', 'Point Machine 2'))

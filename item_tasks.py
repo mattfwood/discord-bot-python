@@ -3,6 +3,8 @@ from point_system import update_points
 fb = firebase.FirebaseApplication(
     'https://discord-bot-db.firebaseio.com', None)
 
+client = discord.Client()
+
 
 def add_point_task():
     """
@@ -10,16 +12,19 @@ def add_point_task():
     point incrementing items and give them that many points
     """
     players = fb.get('/players', None)
+    point_announcement = []
     for key, player in players.items():
         if 'Point Machine' in player['items']:
             print(player['items']['Point Machine'])
             point_amount = player['items']['Point Machine'] * 2
-            print(f"Giving {point_amount} points to {player['discord_id']}")
+            player_message = f"Giving {point_amount} points to @{player['discord_id']}"
+            print(player_message)
+            point_announcement.append(player_message)
             new_total = player['points'] + point_amount
             update_points(player, new_total)
-
-    pass
+    return '\n'.join(point_announcement)
 
 
 if __name__ == '__main__':
-    add_point_task()
+    message = add_point_task()
+    make_announcement(message, channel='point-machines')

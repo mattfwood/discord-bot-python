@@ -131,9 +131,3 @@ def bet_total(discord_id, half=False):
     player = find_player(discord_id)
     total_points = player['points'] if not half else player['points'] / 2
     return flip_coin(total_points, discord_id)
-
-
-def bet_half(discord_id):
-    player = find_player(discord_id)
-    total_points = player['points']
-    return flip_coin(total_points, discord_id)

@@ -125,3 +125,9 @@ def flip_coin(amount: int, player_name: str) -> str:
             return "You can't bet negative points!"
         else:
             return f"You can't bet {amount} points, you only have {player['points']}!"
+
+
+def bet_all(discord_id):
+    player = find_player(discord_id)
+    total_points = player['points']
+    return flip_coin(total_points, discord_id)

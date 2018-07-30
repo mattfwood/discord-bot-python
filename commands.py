@@ -2,22 +2,22 @@ import random
 import requests
 import json
 from time import time
-from point_system import add_point, flip_coin, find_player
+from point_system import add_point, flip_coin, find_player, bet_all
 from item_system import items, buy_item
 from combat_system import attack_enemy
 
 
-def decide(input: str, message) -> str:
+def decide(user_input: str, message) -> str:
     """`[List of Options]` Pick a random item from a list, separated by commas"""
-    winner = random.choice(input.split(','))
+    winner = random.choice(user_input.split(','))
     return winner.strip()
 
 
-def reddit(input, message):
+def reddit(user_input, message):
     """`{Subreddit Name}` Get a random item from the top 20 items on a subreddit"""
     try:
         res = requests.get(
-            f'https://www.reddit.com/r/{input}/hot.json?limit=20',
+            f'https://www.reddit.com/r/{user_input}/hot.json?limit=20',
             headers={'User-agent': 'Bone-Bot-Discord'})
         json = res.json()
         random_url = random.choice(json['data']['children'])['data']['url']
@@ -26,7 +26,7 @@ def reddit(input, message):
         return 'Subreddit not found'
 
 
-def inventory(input, message) -> str:
+def inventory(user_input, message) -> str:
     """List the items in your inventory"""
     player = find_player(message.author.name)
     # player = find_player('GreatBearShark')
@@ -41,35 +41,38 @@ def inventory(input, message) -> str:
     return f"**Inventory:**\n{output}"
 
 
-def points(input, message) -> str:
+def points(user_input, message) -> str:
     """Get your current number of points"""
     player = find_player(message.author.name)
     return f"You have **{player['points']}** points, pal."
 
 
-def goodboypoint(input, message) -> str:
+def goodboypoint(user_input, message) -> str:
     """`{Discord Name}` Give one point to a person of your choice"""
     for member in message.mentions:
         message = add_point(member.name)
         return message
 
 
-def gbp(input, message):
+def gbp(user_input, message):
     """Shorthand for !goodboypoint"""
-    return goodboypoint(input, message)
+    return goodboypoint(user_input, message)
 
 
-def bet(input: str, message) -> str:
+def bet(user_input: str, message) -> str:
     """`{Bet Amount}` Place a 50/50 bet with a certain number of points"""
     try:
-        amount = int(input)
+        amount = int(user_input)
         message = flip_coin(amount, message.author.name)
         return message
     except ValueError:
-        return "what the"
+        if user_input is 'all':
+            bet_all(message.author.name)
+        else:
+            return "what the"
 
 
-def store(input, message):
+def store(user_input, message):
     """List all the items available in the store"""
     item_list = []
     for item in items:
@@ -78,19 +81,19 @@ def store(input, message):
     return '\n'.join(item_list)
 
 
-def buy(input, message) -> str:
+def buy(user_input, message) -> str:
     """`{Item Name}` Buy an item by name from the store. Use !store to see items"""
-    message = buy_item(message.author.name, input)
+    message = buy_item(message.author.name, user_input)
     return message
 
 
-def attack(input, message) -> str:
+def attack(user_input, message) -> str:
     """Attack the current enemy if an encounter is active"""
     message = attack_enemy(message.author.name)
     return message
 
 
-def zalgo(input, message) -> str:
+def zalgo(user_input, message) -> str:
     """Uh oh"""
     return 'Ḫ̨̢͎̭̹̼E̷̗̞͟ ̶̧͚̼̥͙̪͝C͟҉̹̠O̧͎͍͈̺͟͜ͅM̦͡E̥̱̖͔̮̩S̷̝̙͚̼͍̜͘'
 

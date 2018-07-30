@@ -2,7 +2,7 @@ import random
 import requests
 import json
 from time import time
-from point_system import add_point, flip_coin, find_player, bet_all
+from point_system import add_point, flip_coin, find_player, bet_total
 from item_system import items, buy_item
 from combat_system import attack_enemy
 
@@ -67,7 +67,9 @@ def bet(user_input: str, message) -> str:
         return message
     except ValueError:
         if user_input is 'all':
-            bet_all(message.author.name)
+            bet_total(message.author.name)
+        elif user_input is 'half':
+            bet_total(message.author.name)
         else:
             return "what the"
 

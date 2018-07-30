@@ -50,17 +50,26 @@ def random_encounter() -> dict:
     return encounter
 
 
-def add_to_attacked(discord_id: str):
-    encounters = fb.get('/encounters', None)
-    encounters_list = list(encounters.keys())
-    encounter_key = encounters_list[0]
-    encounter = encounters[encounter_key]
-    if 'attacked' in encounter:
-        print(type(encounter['attacked']))
-        encounter['attacked'].append(discord_id)
+def add_to_attacked(discord_id: str, boss=False, amount=None):
+    if boss:
+        boss = fb.get('/boss', None)
+        if 'attacked' in boss:
+            boss['attacked'][discord_id] = amount
+        else:
+            boss['attacked'] = {discord_id: amount}
+
+        fb.patch(f'/boss/', boss)
     else:
-        encounter['attacked'] = [discord_id]
-    fb.patch(f'/encounters/{encounter_key}', encounter)
+        encounters = fb.get('/encounters', None)
+        encounters_list = list(encounters.keys())
+        encounter_key = encounters_list[0]
+        encounter = encounters[encounter_key]
+        if 'attacked' in encounter:
+            print(type(encounter['attacked']))
+            encounter['attacked'][discord_id]
+        else:
+            encounter['attacked'] = {discord_id: amount or 0}
+        fb.patch(f'/encounters/{encounter_key}', encounter)
 
 
 def attack_enemy(discord_id: str) -> str:
@@ -123,6 +132,26 @@ def attack_enemy(discord_id: str) -> str:
         return "There's no encounter right now!"
 
 
+def attack_boss(discord_id: str) -> str:
+    boss = fb.get('/boss', None)
+    # Check if there's a boss
+    if boss:
+        # Make sure user hasn't attacked
+        if 'attacked' not in boss or discord_id not in boss['attacked']:
+            player = find_player(discord_id)
+            # Generate normal attack
+            attack = choice(range(1, 100))
+
+            # Add modifiers
+            if 'Nightmare Sword' in player['items']:
+                # Add 10 to attack
+                attack += 10
+
+            add_to_attacked(discord_id, boss=True, amount=attack)
+        else:
+            return "You've already attacked this boss!"
+
+
 def get_reward(health: int) -> int:
     base = health * 2
     modifier = choice(range(-20, 20))
@@ -133,4 +162,5 @@ if __name__ == '__main__':
     # random_encounter()
     # attack('nothing')
     # print(attack_enemy('GreatBearShark'))
-    add_to_attacked('GreatBearShark')
+    # add_to_attacked('GreatBearShark', 50)
+    print(attack_boss('GreatBearShark'))

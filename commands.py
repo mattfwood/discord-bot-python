@@ -95,6 +95,12 @@ def attack(user_input, message) -> str:
     return message
 
 
+def fight(user_input, message) -> str:
+    """Attack the current boss if a boss encounter is active"""
+    message = attack_enemy(message.author.name)
+    return message
+
+
 def zalgo(user_input, message) -> str:
     """Uh oh"""
     return 'Ḫ̨̢͎̭̹̼E̷̗̞͟ ̶̧͚̼̥͙̪͝C͟҉̹̠O̧͎͍͈̺͟͜ͅM̦͡E̥̱̖͔̮̩S̷̝̙͚̼͍̜͘'

@@ -4,7 +4,7 @@ import json
 from time import time
 from point_system import add_point, flip_coin, find_player, bet_total
 from item_system import items, buy_item
-from combat_system import attack_enemy
+from combat_system import attack_enemy, attack_boss
 
 
 def decide(user_input: str, message) -> str:
@@ -103,7 +103,7 @@ def fight(user_input, message) -> str:
 
 def zalgo(user_input, message) -> str:
     """Uh oh"""
-    return 'Ḫ̨̢͎̭̹̼E̷̗̞͟ ̶̧͚̼̥͙̪͝C͟҉̹̠O̧͎͍͈̺͟͜ͅM̦͡E̥̱̖͔̮̩S̷̝̙͚̼͍̜͘'
+    return 'Ḫ̨̢͎̭̹̼E̷̗̞͟ ̶̧͚̼̥͙̪͝C͟҉̹̠O̧͎͍͈̺͟͜ͅM̦͡E̥̱̖͔̮̩S̷̝̙͚̼͍̜͘'
 
 
 if __name__ == "__main__":

@@ -8,17 +8,22 @@ from firebase import firebase
 client = discord.Client()
 
 
-def make_announcement(message, channel='general'):
-    @client.event
-    async def on_ready():
-        print('Sending Announcement')
-        channels = client.get_all_channels()
-        for channel in channels:
-            if channel.name == 'general':
-                await client.send_message(channel, message)
-                client.close()
+def make_announcement(message, channel_name='general'):
+    try:
+        @client.event
+        async def on_ready():
+            print('Sending Announcement')
+            channels = client.get_all_channels()
+            for channel in channels:
+                if channel.name == channel_name:
+                    await client.send_message(channel, message)
+                    client.close()
+                    print('Closing Client...')
+                    return
 
-    client.run(os.getenv('DISCORD_TOKEN'))
+        client.run(os.getenv('DISCORD_TOKEN'))
+    except Exception as e:
+        print(repr(e))
 
 
 if __name__ == '__main__':

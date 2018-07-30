@@ -148,7 +148,7 @@ def attack_boss(discord_id: str) -> str:
                 attack += 10
 
             add_to_attacked(discord_id, boss=True, amount=attack)
-            return f'{discord_id} attacked for {amount}'
+            return f'{discord_id} attacked for {attack}'
         else:
             return "You've already attacked this boss!"
 

@@ -2,7 +2,7 @@ import os
 import discord
 import asyncio
 import time
-from combat_system import random_encounter
+from combat_system import random_encounter, get_reward
 from firebase import firebase
 from raven import Client
 
@@ -25,7 +25,7 @@ async def on_ready():
     for channel in channels:
         if channel.name == 'combat':
             await client.send_message(channel, message)
-            await client.send_message(channel, 'Use `!fight` to try and roll the highest attack against the enemy.')
+            await client.send_message(channel, 'Use `!fight` to try and roll the highest attack against the enemy for the next 5 minutes.')
             encounter = enemy
             encounter['started_at'] = start_time
             encounter['attacked'] = []
@@ -33,10 +33,15 @@ async def on_ready():
             # wait 5 minutes
             await asyncio.sleep(300)
 
-            # Alert that the enemy ran away
-            await client.send_message(channel, f"{enemy['name']} ran away!")
-            # Reset Encounters
-            fb.delete(f'/boss', None)
-            client.close()
+            boss = fb.get('/boss', None)
+
+            highest_attack = max(boss['attacked'].values())
+            for player, attack in boss['attacked'].items():
+                if attack is highest_attack:
+                    winner = player
+                    reward = get_reward(boss['health']) * 2
+                    await client.send_message(channel, f"{winner} wins the boss fight with a score of {attack}! {winner} wins **{reward}** points!")
+                    client.close()
+                    return
 
 client.run(os.getenv('DISCORD_TOKEN'))

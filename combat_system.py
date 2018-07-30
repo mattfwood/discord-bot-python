@@ -163,4 +163,7 @@ if __name__ == '__main__':
     # attack('nothing')
     # print(attack_enemy('GreatBearShark'))
     # add_to_attacked('GreatBearShark', 50)
-    print(attack_boss('GreatBearShark'))
+    # print(attack_boss('GreatBearShark'))
+    boss = fb.get('/boss', None)
+    for player, attack in boss['attacked'].items():
+        print((player, attack))

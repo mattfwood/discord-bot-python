@@ -92,6 +92,25 @@ def attack_enemy(discord_id: str) -> str:
                 add_to_attacked(discord_id)
                 return message
             else:
+                # Try again if they have second sword
+                if 'Second Sword' in player['items']:
+                    second_attack = choice(range(1, 100))
+                    if 'Nightmare Sword' in player['items']:
+                        # Add 10 to attack
+                        second_attack += 10
+                        if second_attack > encounter['health']:
+                            reward = get_reward(encounter['health'])
+                            new_total = player['points'] + reward
+                            update_points(player, new_total)
+                            weapon_text = ''
+                            # Conditionally add text if player has weapon
+                            if 'Nightmare Sword' in player['items']:
+                                weapon_text = ' (+10 from Nightmare Sword) '
+                            message = f"Your first attack of **{attack}** failed, but on your second attack you rolled **{second_attack}**{weapon_text}and defeated **{encounter['name']}**! You get **{reward}** points."
+                            add_to_attacked(discord_id)
+                            return message
+
+                # Otherwise resolve fight as a loss
                 weapon_text = ''
                 if 'Nightmare Sword' in player['items']:
                     weapon_text = ' (+10 from Nightmare Sword) '

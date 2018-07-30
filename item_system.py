@@ -21,6 +21,11 @@ items = [
         'price': 1000
     },
     {
+        'name': 'Second Sword',
+        'description': 'Get two attempts when attacking a boss.',
+        'price': 2500
+    }
+    {
         'name': 'Skateboard',
         'description': 'Holy shit',
         'price': 5000

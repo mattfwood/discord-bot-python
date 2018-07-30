@@ -97,7 +97,7 @@ def attack(user_input, message) -> str:
 
 def fight(user_input, message) -> str:
     """Attack the current boss if a boss encounter is active"""
-    message = attack_enemy(message.author.name)
+    message = attack_boss(message.author.name)
     return message
 
 

@@ -68,9 +68,9 @@ def bet(user_input: str, message) -> str:
     except ValueError:
         print('VALUE ERROR:')
         print(user_input)
-        if user_input is 'all':
+        if user_input == 'all':
             return bet_total(message.author.name)
-        elif user_input is 'half':
+        elif user_input == 'half':
             return bet_total(message.author.name, half=True)
         else:
             return "what the"

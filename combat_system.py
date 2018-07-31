@@ -15,6 +15,22 @@ enemies = [
         'health': 22,
     },
     {
+        'name': 'John Deere Monky',
+        'health': 15
+    },
+    {
+        'name': 'DDOS Mundo',
+        'health': 66
+    },
+    {
+        'name': 'Bakugan',
+        'health': 30
+    },
+    {
+        'name': "Waluigi's Legs",
+        'health': 42
+    },
+    {
         'name': 'Pineapple Bee Monster',
         'health': 71,
     },
@@ -78,13 +94,17 @@ def combat_text(player, attacks, enemy, win=False, reward=0) -> str:
             return f"You rolled **{attacks[0]}**{weapon_text}and defeated **{enemy}**! You get **{reward}** points."
         elif len(attacks) == 2:
             first_attack, second_attack = attacks
-            return f"Your first attack of **{first_attack}**{weapon_text} failed, but using your _second sword_ you rolled **{second_attack}**{weapon_text}and defeated **{enemy}**! You get **{reward}** points."
+            return f'''Your first attack of **{first_attack}**{weapon_text} failed,
+            but using your _second sword_ you rolled **{second_attack}**{weapon_text}and defeated **{enemy}**!
+            You get **{reward}** points.'''
     else:
         if len(attacks) == 1:
             return f"You rolled **{attacks[0]}**{weapon_text}and lost to **{enemy}**. You get *nothing*."
         if len(attacks) == 2:
             first_attack, second_attack = attacks
-            return f"Your first attack of **{first_attack}**{weapon_text} failed, but your _second sword_ attack of **{second_attack}**{weapon_text}also failed to defeat **{enemy}**. Big Yikes."
+            return f'''Your first attack of **{first_attack}**{weapon_text} failed,
+            but your _second sword_ attack of **{second_attack}**{weapon_text}also failed to defeat **{enemy}**.
+            Big Yikes.'''
 
 def attack_enemy(discord_id: str) -> str:
     encounters = fb.get('/encounters', None)

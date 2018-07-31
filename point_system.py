@@ -75,12 +75,11 @@ def add_point(discord_id: str) -> str:
 
             player['last_updated'] = (current_minutes)
             fb.patch(f'/players/{discord_id}', player)
-            return f"You gave {player['discord_id']} one good boy point! Now they have {new_total}."
+            return f"You gave <@{player['discord_id']}> one good boy point! Now they have {new_total}."
         else:
             time_diff = int(current_minutes - player['last_updated'])
-            player_name = player['discord_id']
             minutes_left = 5 - time_diff
-            return f"It's too soon to give another good boy point to {player_name}! ({minutes_left} minutes left)"
+            return f"It's too soon to give another good boy point to <@{player['discord_id']}>! ({minutes_left} minutes left)"
     else:
         # Add user
         return add_user(discord_id)
@@ -119,7 +118,7 @@ def flip_coin(amount: int, player_name: str) -> str:
                  'squawking duck',
                  'unbelievable fool',
                  'little baby'])
-            return f'You {insult}. {player_name} lost {amount} points! Now you have {new_total}.'
+            return f'You {insult}. You lost {amount} points! Now you have {new_total}.'
     else:
         if amount < 0:
             return "You can't bet negative points!"

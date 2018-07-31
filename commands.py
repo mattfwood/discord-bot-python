@@ -67,9 +67,9 @@ def bet(user_input: str, message) -> str:
         return message
     except ValueError:
         if user_input is 'all':
-            bet_total(message.author.name)
+            return bet_total(message.author.name)
         elif user_input is 'half':
-            bet_total(message.author.name)
+            return bet_total(message.author.name)
         else:
             return "what the"
 
@@ -107,4 +107,5 @@ def zalgo(user_input, message) -> str:
 
 
 if __name__ == "__main__":
-    inventory('beep', 'boop')
+    # inventory('beep', 'boop')
+    print(bet('all', 'message'))

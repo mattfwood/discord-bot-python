@@ -40,8 +40,8 @@ def start_raid():
     raid = fb.get('/raid', None)
     # Mark raid as active
     raid['active'] = True
-    raid['boss'] = random_encounter()
-    raid['boss']['health'] = 100
+    raid['boss']['enemy'] = random_encounter()
+    raid['boss']['enemy']['health'] = 100
     fb.patch(f'/raid/', raid)
     return 'Raid has started! Take turns attacking to try and defeat the boss.'
 
@@ -59,12 +59,12 @@ def raid_attack(discord_id):
         damage = randint(1, 10)
 
         # Apply damage to boss
-        raid['boss']['health'] -= damage
+        raid['boss']['enemy']['health'] -= damage
 
-        combat_text.append(f'You dealt {damage} to {raid['boss']['name']}! ({raid['boss']['health']} HP left)')
+        combat_text.append(f'You dealt {damage} to {raid['boss']['enemy']['name']}! ({raid['boss']['enemy']['health']} HP left)')
 
         # Check if boss is dead
-        boss_dead = raid['boss']['health'] <= 0
+        boss_dead = raid['boss']['enemy']['health'] <= 0
 
         if boss_dead:
             return raid_win(combat_text)
@@ -77,7 +77,7 @@ def raid_attack(discord_id):
 
         # Check that player is still alive
         if player_dead:
-            combat_text.append(f"{raid['boss']['name']} dealt **{boss_damage}** and killed you! Hopefully one of your raid members will avenge your death.")
+            combat_text.append(f"{raid['boss']['enemy']['name']} dealt **{boss_damage}** and killed you! Hopefully one of your raid members will avenge your death.")
 
         # Check that any players are still alive
         no_remaining_players = max(raid['players']) < 1

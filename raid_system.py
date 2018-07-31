@@ -98,3 +98,4 @@ def raid_loss(combat_text):
     return '\n'.join(combat_text)
 
 def raid_reset():
+    pass

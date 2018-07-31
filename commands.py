@@ -107,7 +107,7 @@ def raid(user_input, message):
     """{Amount} Put a certain number of points toward the raid fund"""
     try:
         amount = int(user_input)
-        message = raid_fund(user_input, message.author.id)
+        message = raid_fund(amount, message.author.id)
         return message
     except ValueError:
         return 'Please input a quantity to put toward the raid fund'

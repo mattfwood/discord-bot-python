@@ -66,10 +66,12 @@ def bet(user_input: str, message) -> str:
         message = flip_coin(amount, message.author.name)
         return message
     except ValueError:
+        print('VALUE ERROR:')
+        print(user_input)
         if user_input is 'all':
             return bet_total(message.author.name)
         elif user_input is 'half':
-            return bet_total(message.author.name)
+            return bet_total(message.author.name, half=True)
         else:
             return "what the"
 

@@ -25,7 +25,8 @@ def raid_fund(amount, discord_id):
         # Create raid
         new_raid = {
             'fund': amount,
-            'players': [discord_id]
+            'players': [discord_id],
+            'active': False,
         }
         fb.patch(f'/raid/', new_raid)
         return f'You started a new raid fund with {amount} points ({1000 - amount} remaining to start)'

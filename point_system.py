@@ -107,7 +107,7 @@ def flip_coin(amount: int, player_name: str) -> str:
             # gain amount bet
             new_total = player['points'] + amount
             update_points(player, new_total)
-            return f'<:poggers:471769534903353364> Winner! You won {amount} points! Now you have {new_total}.'
+            return f'<:poggers:471769534903353364> Winner! {player_name} won {amount} points! Now you have {new_total}.'
 
         else:
             # lose amount
@@ -119,7 +119,7 @@ def flip_coin(amount: int, player_name: str) -> str:
                  'squawking duck',
                  'unbelievable fool',
                  'little baby'])
-            return f'You {insult}. You lost {amount} points! Now you have {new_total}.'
+            return f'You {insult}. {player_name} lost {amount} points! Now you have {new_total}.'
     else:
         if amount < 0:
             return "You can't bet negative points!"

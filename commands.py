@@ -5,6 +5,7 @@ from time import time
 from point_system import add_point, flip_coin, find_player, bet_total
 from item_system import items, buy_item
 from combat_system import attack_enemy, attack_boss
+from raid_system import raid_fund
 
 
 def decide(user_input: str, message) -> str:
@@ -102,6 +103,14 @@ def fight(user_input, message) -> str:
     message = attack_boss(message.author.id)
     return message
 
+def raid(user_input, message):
+    """{Amount} Put a certain number of points toward the raid fund"""
+    try:
+        amount = int(user_input)
+        message = raid_fund(user_input, message.author.id)
+        return message
+    except ValueError:
+        return 'Please input a quantity to put toward the raid fund'
 
 def zalgo(user_input, message) -> str:
     """Uh oh"""
@@ -110,4 +119,5 @@ def zalgo(user_input, message) -> str:
 
 if __name__ == "__main__":
     # inventory('beep', 'boop')
-    print(bet('all', 'message'))
+    # print(bet('all', 'message'))
+    print(raid(100, '199772341679554561'))

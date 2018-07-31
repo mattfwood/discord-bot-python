@@ -1,21 +1,16 @@
 {
   "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "Python",
-      "type": "python",
-      "request": "launch",
-      "stopOnEntry": "false",
-      "pythonPath": "${config:python.pythonPath}",
-      "program": "${file}",
-      "cwd": "${workspaceRoot}",
-      "env": {},
-      "envFile": "${workspaceRoot}/.env",
-      "debugOptions": [
-        "WaitOnAbnormalExit",
-        "WaitOnNormalExit",
-        "RedirectOutput"
-      ]
-    }
-  ]
+  "configurations": [{
+    "name": "Python",
+    "type": "python",
+    "request": "launch",
+    "stopOnEntry": true,
+    "program": "${file}",
+    "cwd": "${workspaceFolder}",
+    "debugOptions": [
+      "WaitOnAbnormalExit",
+      "WaitOnNormalExit",
+      "RedirectOutput"
+    ]
+  }]
 }

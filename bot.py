@@ -52,7 +52,7 @@ async def on_message(message):
         # if valid method provided
         if method:
             # call command with message content
-            reply = method(text, message=message)
+            reply = f'<@{message.author.id}> ' + method(text, message=message)
 
             print('Replying with:')
             print(reply)
@@ -64,7 +64,7 @@ async def on_message(message):
         print(repr(e))
         # Catch errors that are invalid commands
         if command not in commands.__dict__ and command is not 'commands':
-            reply = f"'{command}' isn't a command, dummy"
+            reply = f"<@{message.author.id}> '{command}' isn't a command, dummy"
             await client.send_message(message.channel, reply)
         else:
             # Otherwise report real errors

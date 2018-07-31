@@ -93,17 +93,13 @@ def combat_text(player, attacks, enemy, win=False, reward=0) -> str:
             return f"You rolled **{attacks[0]}**{weapon_text}and defeated **{enemy}**! You get **{reward}** points."
         elif len(attacks) == 2:
             first_attack, second_attack = attacks
-            return f'''Your first attack of **{first_attack}**{weapon_text} failed,
-            but using your _second sword_ you rolled **{second_attack}**{weapon_text}and defeated **{enemy}**!
-            You get **{reward}** points.'''
+            return f'''Your first attack of **{first_attack}**{weapon_text} failed, but using your _second sword_, you rolled **{second_attack}**{weapon_text}and defeated **{enemy}**! You get **{reward}** points.'''
     else:
         if len(attacks) == 1:
             return f"You rolled **{attacks[0]}**{weapon_text}and lost to **{enemy}**. You get *nothing*."
         if len(attacks) == 2:
             first_attack, second_attack = attacks
-            return f'''Your first attack of **{first_attack}**{weapon_text} failed,
-            but your _second sword_ attack of **{second_attack}**{weapon_text}also failed to defeat **{enemy}**.
-            Big Yikes.'''
+            return f'''Your first attack of **{first_attack}**{weapon_text} failed, but your _second sword_ attack of **{second_attack}**{weapon_text}also failed to defeat **{enemy}**. Big Yikes.'''
 
 def attack_enemy(discord_id: str) -> str:
     encounters = fb.get('/encounters', None)
@@ -142,10 +138,6 @@ def attack_enemy(discord_id: str) -> str:
                         reward = get_reward(encounter['health'])
                         new_total = player['points'] + reward
                         update_points(player, new_total)
-                        weapon_text = ''
-                        # Conditionally add text if player has weapon
-                        if 'Nightmare Sword' in player['items']:
-                            weapon_text = ' (+10 from Nightmare Sword) '
                         message = combat_text(player, attacks, encounter['name'], win=True, reward=reward)
                         add_to_attacked(discord_id)
                         return message
@@ -180,7 +172,7 @@ def attack_boss(discord_id: str) -> str:
                 attack += 10
 
             add_to_attacked(discord_id, boss=True, amount=attack)
-            return f'<@{discord_id}> attacked for **{attack}**!'
+            return f'You attacked for **{attack}**!'
         else:
             return "You've already attacked this boss!"
 

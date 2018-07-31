@@ -41,12 +41,14 @@ async def on_ready():
                     if attack is highest_attack:
                         winner = player
                         reward = get_reward(boss['health']) * 2
-                        await client.send_message(channel, f"{winner} wins the boss fight with a score of {attack}! {winner} wins **{reward}** points!")
+                        await client.send_message(channel, f"<@{winner['discord_id']}> wins the boss fight with a score of {attack}! {winner} wins **{reward}** points!")
+                        fb.delete(f'/boss', None)
                         client.close()
                         return
             else:
-                message = '@everyone You fools have failed to attack the boss, everyone loses all their points!'
+                message = '<@everyone> You fools have failed to attack the boss, everyone loses all their points!'
                 await client.send_message(channel, message)
+                fb.delete(f'/boss', None)
                 client.close()
                 return
 

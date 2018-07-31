@@ -17,7 +17,7 @@ def raid_fund(amount, discord_id):
             raid['players'] = [discord_id]
         fb.patch(f'/raid/', raid)
         if raid['fund'] < 1000:
-            return f"You added {amount} points to the raid fund, bringing the total to {raid['fund']} (({1000 - raid['fund']} remaining to start))"
+            return f"You added {amount} points to the raid fund, bringing the total to {raid['fund']} ({1000 - raid['fund']} remaining to start)"
         else:
             return 'RAID STARTING (COMING SOON)'
 

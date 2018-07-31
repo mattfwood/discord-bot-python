@@ -16,6 +16,11 @@ items = [
         'price': 100
     },
     {
+        'name': 'Loaded Dice',
+        'description': "Gives you a +10% chance to win bets",
+        'price': 500,
+    },
+    {
         'name': 'Nightmare Sword',
         'description': 'Get +10 damage to your rolls. Made from real nightmares.',
         'price': 1000

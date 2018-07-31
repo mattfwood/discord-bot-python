@@ -172,7 +172,12 @@ def attack_boss(discord_id: str) -> str:
                 attack += 10
 
             add_to_attacked(discord_id, boss=True, amount=attack)
-            return f'You attacked for **{attack}**!'
+
+            attacks = boss['attacks']
+            highest_attack = max(attacks.values())
+            highest_attacker = max(attacks)
+
+            return f'You attacked for **{attack}**! Current leader is {highest_attacker} with **{highest_attack}**'
         else:
             return "You've already attacked this boss!"
     else:

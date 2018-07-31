@@ -61,7 +61,7 @@ def raid_attack(discord_id):
         # Apply damage to boss
         raid['boss']['enemy']['health'] -= damage
 
-        combat_text.append(f'You dealt {damage} to {raid['boss']['enemy']['name']}! ({raid['boss']['enemy']['health']} HP left)')
+        combat_text.append(f"You dealt {damage} to {raid['boss']['enemy']['name']}! ({raid['boss']['enemy']['health']} HP left)")
 
         # Check if boss is dead
         boss_dead = raid['boss']['enemy']['health'] <= 0

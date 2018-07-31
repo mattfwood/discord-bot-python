@@ -16,8 +16,8 @@ def raid_fund(amount, discord_id):
         # Add raid fund amount
         raid['fund'] += amount
         if 'players' in raid:
-            raid['players'].append({ discord_id: 30 })
-            pass
+            if discord_id not in raid['players']:
+                raid['players'].append({ discord_id: 30 })
         else:
             raid['players'] = [{ discord_id: 30 }]
         fb.patch(f'/raid/', raid)

@@ -27,4 +27,4 @@ def make_announcement(message, channel_name='general'):
 
 
 if __name__ == '__main__':
-    make_announcement('test')
+    make_announcement('@everyone New items have appeared in the shop...', channel_name='general')

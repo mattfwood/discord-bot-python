@@ -5,7 +5,7 @@ from time import time
 from point_system import add_point, flip_coin, find_player, bet_total
 from item_system import items, buy_item
 from combat_system import attack_enemy, attack_boss
-from raid_system import raid_fund
+from raid_system import raid_fund, raid_attack
 
 
 def decide(user_input: str, message) -> str:
@@ -114,6 +114,11 @@ def raid(user_input, message):
             return 'You must enter a valid amount.'
     except ValueError:
         return 'Please input a quantity to put toward the raid fund'
+
+def attack_raid(user_input, message):
+    """Attack the current raid boss"""
+    message = raid_attack(message.author.id)
+    return message
 
 def zalgo(user_input, message) -> str:
     """Uh oh"""

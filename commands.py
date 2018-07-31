@@ -50,7 +50,7 @@ def points(user_input, message) -> str:
 def goodboypoint(user_input, message) -> str:
     """`{Discord Name}` Give one point to a person of your choice"""
     for member in message.mentions:
-        message = add_point(member.name)
+        message = add_point(member.id)
         return message
 
 

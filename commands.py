@@ -82,7 +82,7 @@ def store(user_input, message):
     for item in items:
         item_entry = f"**{item['name']}:** {item['price']} - *{item['description']}*"
         item_list.append(item_entry)
-    return '\n'.join(item_list)
+    return '\n' + '\n'.join(item_list)
 
 
 def buy(user_input, message) -> str:

@@ -34,6 +34,11 @@ items = [
         'name': 'Skateboard',
         'description': 'Holy shit',
         'price': 5000
+    },
+    {
+        'name': 'Plate of Spaghetti',
+        'description': "Your One Weakness.",
+        'price': 10000
     }
 ]
 

@@ -1,4 +1,4 @@
-from random import choice
+from random import choice, randint
 from firebase import firebase
 from point_system import update_points, find_player
 
@@ -114,7 +114,7 @@ def attack_enemy(discord_id: str) -> str:
             player = find_player(discord_id)
 
             # Roll attack
-            attack = choice(range(1, 100))
+            attack = randint(1, 100)
             # Add 10 to attack if they have a sword
             attack += 10 if 'Nightmare Sword' in player['items'] else 0
             if attack > encounter['health']:
@@ -130,7 +130,7 @@ def attack_enemy(discord_id: str) -> str:
             else:
                 # Try again if they have second sword
                 if 'Second Sword' in player['items']:
-                    second_attack = choice(range(1, 100))
+                    second_attack = randint(1, 100)
                     second_attack += 10 if 'Nightmare Sword' in player['items'] else 0
                     attacks = [attack, second_attack]
 
@@ -164,7 +164,7 @@ def attack_boss(discord_id: str) -> str:
         if 'attacked' not in boss or discord_id not in boss['attacked']:
             player = find_player(discord_id)
             # Generate normal attack
-            attack = choice(range(1, 100))
+            attack = randint(1, 100)
 
             # Add modifiers
             if 'Nightmare Sword' in player['items']:

@@ -1,4 +1,4 @@
-import random
+from random import choice, randint
 import pprint
 from time import time
 from firebase import firebase
@@ -97,22 +97,30 @@ def point_available(player) -> bool:
 
 
 def flip_coin(amount: int, player_name: str) -> str:
+    print(type(amount))
     pp.pprint(player_name)
     player = find_player(player_name)
     # If the user has enough points to bet
     if 0 <= amount <= player['points']:
-        win = random.choice([True, False])
+        if 'Loaded Dice' in player['items']:
+            roll = randint(1, 100)
+            win = roll <= 60
+        else:
+            win = choice([True, False])
         if win:
             # gain amount bet
             new_total = player['points'] + amount
             update_points(player, new_total)
-            return f'<:poggers:471769534903353364> Winner! {player_name} won {amount} points! Now you have {new_total}.'
+            if 'Loaded Dice' in player['items']:
+                return f"<:poggers:471769534903353364> Hmm... Those dice don't look right, but you won {amount} points! Now you have {new_total}."
+            else:
+                return f'<:poggers:471769534903353364> Winner! You won {amount} points! Now you have {new_total}.'
 
         else:
             # lose amount
             new_total = player['points'] - amount
             update_points(player, new_total)
-            insult = random.choice(
+            insult = choice(
                 ['stinky loser',
                  'honking goose',
                  'squawking duck',
@@ -130,3 +138,6 @@ def bet_total(discord_id, half=False):
     player = find_player(discord_id)
     total_points = player['points'] / 2 if half else player['points']
     return flip_coin(total_points, discord_id)
+
+if __name__ == "__main__":
+    print(flip_coin(1, '199772341679554561'))

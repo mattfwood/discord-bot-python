@@ -81,7 +81,6 @@ def add_to_attacked(discord_id: str, boss=False, amount=None):
         encounter_key = encounters_list[0]
         encounter = encounters[encounter_key]
         if 'attacked' in encounter:
-            print(type(encounter['attacked']))
             encounter['attacked'][discord_id] = 0
         else:
             encounter['attacked'] = {discord_id: amount or 0}

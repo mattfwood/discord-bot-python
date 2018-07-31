@@ -35,13 +35,19 @@ async def on_ready():
 
             boss = fb.get('/boss', None)
 
-            highest_attack = max(boss['attacked'].values())
-            for player, attack in boss['attacked'].items():
-                if attack is highest_attack:
-                    winner = player
-                    reward = get_reward(boss['health']) * 2
-                    await client.send_message(channel, f"{winner} wins the boss fight with a score of {attack}! {winner} wins **{reward}** points!")
-                    client.close()
-                    return
+            if 'attacked' in boss:
+                highest_attack = max(boss['attacked'].values())
+                for player, attack in boss['attacked'].items():
+                    if attack is highest_attack:
+                        winner = player
+                        reward = get_reward(boss['health']) * 2
+                        await client.send_message(channel, f"{winner} wins the boss fight with a score of {attack}! {winner} wins **{reward}** points!")
+                        client.close()
+                        return
+            else:
+                message = '@everyone You fools have failed to attack the boss, everyone loses all their points!'
+                await client.send_message(channel, message)
+                client.close()
+                return
 
 client.run(os.getenv('DISCORD_TOKEN'))

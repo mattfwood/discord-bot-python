@@ -46,7 +46,7 @@ async def on_ready():
                         client.close()
                         return
             else:
-                message = '<@everyone> You fools have failed to attack the boss, everyone loses all their points!'
+                message = '@everyone You fools have failed to attack the boss, the bot is displeased.'
                 await client.send_message(channel, message)
                 fb.delete(f'/boss', None)
                 client.close()

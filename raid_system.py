@@ -9,7 +9,7 @@ fb = firebase.FirebaseApplication(
 
 def raid_fund(amount, discord_id):
     raid = fb.get('/raid', None)
-    if raid['active'] is True:
+    if raid and raid['active'] is True:
         return 'A raid has already started!'
 
     if raid and raid['active'] is False:
@@ -49,17 +49,20 @@ def raid_attack(discord_id):
     raid = fb.get('/raid', None)
     player = find_player(discord_id)
     combat_text = []
-    if raid['active'] is True:
+    if raid and raid['active'] is True:
         # Check that player is alive
         player_in_raid = discord_id in raid['players']
-        if player_in_raid is False:
-            return 'Sorry, you did not fund this raid and cannot participate'
+        # if player_in_raid is False:
+        #     return 'Sorry, you did not fund this raid and cannot participate'
 
         # Calculate damage
         damage = randint(1, 10)
 
         # Apply damage to boss
-        raid['boss']['health'] -= damage
+        if 'health' not in raid['boss']:
+            raid['players'][discord_id] = 30 - damage
+        else:
+            raid['boss']['health'] -= damage
 
         combat_text.append(f"You dealt {damage} to {raid['boss']['name']}! ({raid['boss']['health']} HP left)")
 

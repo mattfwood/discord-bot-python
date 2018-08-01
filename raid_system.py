@@ -59,7 +59,10 @@ def raid_attack(discord_id):
         damage = randint(1, 10)
 
         # Apply damage to boss
-        raid['boss']['health'] -= damage
+        if 'health' not in raid['boss']:
+            raid['players'][discord_id] = 30 - damage
+        else:
+            raid['boss']['health'] -= damage
 
         combat_text.append(f"You dealt {damage} to {raid['boss']['name']}! ({raid['boss']['health']} HP left)")
 

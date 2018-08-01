@@ -52,8 +52,9 @@ def raid_attack(discord_id):
     if raid and raid['active'] is True:
         # Check that player is alive
         player_in_raid = discord_id in raid['players']
-        # if player_in_raid is False:
-        #     return 'Sorry, you did not fund this raid and cannot participate'
+        if player_in_raid is False:
+            raid['players']['discord'] = 30
+            # return 'Sorry, you did not fund this raid and cannot participate'
 
         # Calculate damage
         damage = randint(1, 10)
@@ -64,7 +65,7 @@ def raid_attack(discord_id):
         else:
             raid['boss']['health'] -= damage
 
-        combat_text.append(f"You dealt {damage} to {raid['boss']['name']}! ({raid['boss']['health']} HP left)")
+        combat_text.append(f"You dealt **{damage}** to {raid['boss']['name']}! ({raid['boss']['health']} HP left)")
 
         # Check if boss is dead
         boss_dead = raid['boss']['health'] <= 0

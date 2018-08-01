@@ -19,7 +19,7 @@ def raid_fund(amount, discord_id):
             if discord_id not in raid['players']:
                 raid['players'][discord_id] = 30
         else:
-            raid['players'] = { discord_id: 30 }
+            raid['players'] = {discord_id: 30}
         fb.patch(f'/raid/', raid)
         if raid['fund'] < 1000:
             return f"You added {amount} points to the raid fund, bringing the total to {raid['fund']} ({1000 - raid['fund']} remaining to start)"
@@ -78,12 +78,17 @@ def raid_attack(discord_id):
         # Check that player is still alive
         if player_dead:
             combat_text.append(f"{raid['boss']['name']} dealt **{boss_damage}** and killed you! Hopefully one of your raid members will avenge your death.")
+        else:
+            combat_text.append(f"{raid['boss']['name']} dealt **{boss_damage}** to you! You now have {raid['players'][discord_id]} HP.")
 
         # Check that any players are still alive
-        no_remaining_players = max(raid['players']) < 1
+        no_remaining_players = max(raid['players'].values()) < 1
 
         if no_remaining_players:
             return raid_loss(combat_text)
+
+        # Update raid status
+        fb.patch(f'/raid/', raid)
 
         return '\n'.join(combat_text)
     else:

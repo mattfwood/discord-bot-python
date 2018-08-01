@@ -128,4 +128,6 @@ def zalgo(user_input, message) -> str:
 if __name__ == "__main__":
     # inventory('beep', 'boop')
     # print(bet('all', 'message'))
-    print(raid(100, '199772341679554561'))
+    # print(raid(100, '199772341679554561'))
+    # print(raid_fund(100, '199772341679554561'))
+    print(raid_attack('199772341679554561'))

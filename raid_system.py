@@ -53,8 +53,11 @@ def raid_attack(discord_id):
         # Check that player is alive
         player_in_raid = discord_id in raid['players']
         if player_in_raid is False:
-            raid['players']['discord'] = 30
+            raid['players'][discord_id] = 30
             # return 'Sorry, you did not fund this raid and cannot participate'
+
+        if raid['players'][discord_id] <= 0:
+            return f"You can't fight in this raid, you've died!"
 
         # Calculate damage
         damage = randint(1, 10)

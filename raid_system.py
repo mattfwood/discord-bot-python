@@ -105,7 +105,7 @@ def raid_win(combat_text, raid):
     reward = get_reward(500)
     player_count = len(raid['players'])
     # Calculate reward for each player
-    player_reward = reward / player_count
+    player_reward = int(reward / player_count)
 
     # Add points to each player
     for player_id in raid['players']:

@@ -1,7 +1,7 @@
 from random import randint
 from firebase import firebase
 from point_system import update_points, find_player
-from combat_system import random_encounter
+from combat_system import random_encounter, get_reward
 
 fb = firebase.FirebaseApplication(
     'https://discord-bot-db.firebaseio.com', None)
@@ -74,7 +74,7 @@ def raid_attack(discord_id):
         boss_dead = raid['boss']['health'] <= 0
 
         if boss_dead:
-            return raid_win(combat_text)
+            return raid_win(combat_text, raid)
 
         # Deal damage to player
         boss_damage = randint(1, 10)
@@ -101,8 +101,19 @@ def raid_attack(discord_id):
     else:
         return "There isn't an active raid."
 
-def raid_win(combat_text):
-    combat_text.append("You've defeated the raid boss! Make sure Matt actually adds the points here at some point.")
+def raid_win(combat_text, raid):
+    reward = get_reward(500)
+    player_count = len(raid['players'])
+    # Calculate reward for each player
+    player_reward = reward / player_count
+
+    # Add points to each player
+    for player_id in raid['players']:
+        player = find_player(player_id)
+        new_total = player['points'] + player_reward
+        update_points(player, new_total)
+
+    combat_text.append(f"You've defeated the raid boss! All players are awarded {player_reward} points!")
     return '\n'.join(combat_text)
 
 def raid_loss(combat_text):

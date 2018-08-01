@@ -1,8 +1,7 @@
 from random import choice, randint
-import pprint
 from time import time
 from firebase import firebase
-pp = pprint.PrettyPrinter(indent=4)
+from player import Player
 
 fb = firebase.FirebaseApplication(
     'https://discord-bot-db.firebaseio.com', None)
@@ -97,46 +96,44 @@ def point_available(player) -> bool:
 
 
 def flip_coin(amount: int, player_name: str) -> str:
-    print(type(amount))
-    pp.pprint(player_name)
-    player = find_player(player_name)
+    # player = find_player(player_name)
+    player = Player(player_name)
     # If the user has enough points to bet
-    if 0 <= amount <= player['points']:
-        if 'Loaded Dice' in player['items']:
+    if 0 <= amount <= player.points:
+        if 'Loaded Dice' in player.items:
             roll = randint(1, 100)
             win = roll <= 60
         else:
             win = choice([True, False])
         if win:
             # gain amount bet
-            new_total = player['points'] + amount
-            update_points(player, new_total)
-            if 'Loaded Dice' in player['items']:
-                return f"<:poggers:471769534903353364> Hmm... Those dice don't look right, but you won {amount} points! Now you have {new_total}."
+            player.update_points(amount)
+
+            if 'Loaded Dice' in player.items:
+                return f"<:poggers:471769534903353364> Hmm... Those dice don't look right, but you won {amount} points! Now you have {player.points}."
             else:
-                return f'<:poggers:471769534903353364> Winner! You won {amount} points! Now you have {new_total}.'
+                return f'<:poggers:471769534903353364> Winner! You won {amount} points! Now you have {player.points}.'
 
         else:
             # lose amount
-            new_total = player['points'] - amount
-            update_points(player, new_total)
+            player.update_points(-amount)
             insult = choice(
                 ['stinky loser',
                  'honking goose',
                  'squawking duck',
                  'unbelievable fool',
                  'little baby'])
-            return f'You {insult}. You lost {amount} points! Now you have {new_total}.'
+            return f'You {insult}. You lost {amount} points! Now you have {player.points}.'
     else:
         if amount < 0:
             return "You can't bet negative points!"
         else:
-            return f"You can't bet {amount} points, you only have {player['points']}!"
+            return f"You can't bet {amount} points, you only have {player.points}!"
 
 
 def bet_total(discord_id, half=False):
-    player = find_player(discord_id)
-    total_points = player['points'] / 2 if half else player['points']
+    player = Player(discord_id)
+    total_points = player.points / 2 if half else player.points
     return flip_coin(total_points, discord_id)
 
 if __name__ == "__main__":

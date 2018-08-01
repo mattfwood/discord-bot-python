@@ -1,5 +1,6 @@
 from random import choice, randint
 from firebase import firebase
+from player import Player
 from point_system import update_points, find_player
 
 fb = firebase.FirebaseApplication(
@@ -162,23 +163,23 @@ def attack_boss(discord_id: str) -> str:
     if boss:
         # Make sure user hasn't attacked
         if 'attacked' not in boss or discord_id not in boss['attacked']:
-            player = find_player(discord_id)
+            player = Player(discord_id)
             # Generate normal attack
             attack = randint(1, 100)
 
             # Add modifiers
-            if 'Nightmare Sword' in player['items']:
+            if 'Nightmare Sword' in player.items:
                 # Add 10 to attack
                 attack += 10
 
             add_to_attacked(discord_id, boss=True, amount=attack)
 
-            if 'attacks' in boss:
-                attacks = boss['attacks']
+            if 'attacked' in boss:
+                attacks = boss['attacked']
                 highest_attack = max(attacks.values())
                 highest_attacker = max(attacks)
 
-                return f'You attacked for **{attack}**! Current leader is {highest_attacker} with **{highest_attack}**'
+                return f'You attacked for **{attack}**! Current leader is <@{highest_attacker}> with **{highest_attack}**'
             else:
                 return f'You attacked for **{attack}** and are the current leader!'
         else:

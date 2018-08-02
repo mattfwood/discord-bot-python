@@ -10,11 +10,6 @@ fb = firebase.FirebaseApplication(
 def get_players():
     return fb.get('/players', None) or {}
 
-
-def get_score():
-    pass
-
-
 def find_player(discord_id: str):
     all_players = get_players()
     # Find or create player from discord_id

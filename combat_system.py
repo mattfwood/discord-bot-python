@@ -196,9 +196,9 @@ def get_reward(health: int) -> int:
 if __name__ == '__main__':
     # random_encounter()
     # attack('nothing')
-    # print(attack_enemy('GreatBearShark'))
+    print(attack_enemy('200702104568987649'))
     # add_to_attacked('GreatBearShark', 50)
-    print(attack_boss('199772341679554561'))
+    # print(attack_boss('199772341679554561'))
     # boss = fb.get('/boss', None)
     # for player, attack in boss['attacked'].items():
     #     print((player, attack))

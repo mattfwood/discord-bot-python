@@ -92,10 +92,10 @@ def buy(user_input, message) -> str:
     return message
 
 
-def attack(user_input, message) -> str:
-    """Attack the current enemy if an encounter is active"""
-    message = attack_enemy(message.author.id)
-    return message
+# def attack(user_input, message) -> str:
+#     """Attack the current enemy if an encounter is active"""
+#     message = attack_enemy(message.author.id)
+#     return message
 
 
 def fight(user_input, message) -> str:
@@ -105,20 +105,22 @@ def fight(user_input, message) -> str:
 
 def raid(user_input, message):
     """{Amount} Put a certain number of points toward the raid fund"""
-    try:
+    print(user_input)
+    if user_input != '':
+        print('RAID FUNDING')
         amount = int(user_input)
         if amount > 0:
             message = raid_fund(amount, message.author.id)
             return message
         else:
             return 'You must enter a valid amount.'
-    except ValueError:
-        return 'Please input a quantity to put toward the raid fund'
+    else:
+        return raid_attack(message.author.id)
 
-def attack_raid(user_input, message):
-    """Attack the current raid boss"""
-    message = raid_attack(message.author.id)
-    return message
+# def attack_raid(user_input, message):
+#     """Attack the current raid boss"""
+#     message = raid_attack(message.author.id)
+#     return message
 
 def zalgo(user_input, message) -> str:
     """Uh oh"""
@@ -128,6 +130,6 @@ def zalgo(user_input, message) -> str:
 if __name__ == "__main__":
     # inventory('beep', 'boop')
     # print(bet('all', 'message'))
-    # print(raid(100, '199772341679554561'))
-    # print(raid_fund(100, '199772341679554561'))
-    print(raid_attack('199772341679554561'))
+    # print(raid('100', '200702104568987649'))
+    print(raid_fund(100, '200702104568987649'))
+    # print(raid_attack('199772341679554561'))

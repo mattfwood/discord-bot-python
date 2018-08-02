@@ -1,5 +1,6 @@
 from random import randint
 from firebase import firebase
+from player import Player
 from point_system import update_points, find_player
 from combat_system import random_encounter, get_reward
 
@@ -47,7 +48,7 @@ def start_raid():
 
 def raid_attack(discord_id):
     raid = fb.get('/raid', None)
-    player = find_player(discord_id)
+    player = Player(discord_id)
     combat_text = []
     if raid and raid['active'] is True:
         # Check that player is alive
@@ -92,7 +93,7 @@ def raid_attack(discord_id):
         no_remaining_players = max(raid['players'].values()) < 1
 
         if no_remaining_players:
-            return raid_loss(combat_text)
+            return raid_loss(combat_text, raid)
 
         # Update raid status
         fb.patch(f'/raid/', raid)
@@ -114,11 +115,19 @@ def raid_win(combat_text, raid):
         update_points(player, new_total)
 
     combat_text.append(f"You've defeated the raid boss! All players are awarded {player_reward} points!")
+    raid_reset(raid)
     return '\n'.join(combat_text)
 
-def raid_loss(combat_text):
+def raid_loss(combat_text, raid):
     combat_text.append('All raid members have died! The raid has ended.')
     return '\n'.join(combat_text)
 
-def raid_reset():
-    pass
+def raid_reset(raid):
+    raid['boss'] = {}
+    raid['active'] = False
+    raid['fund'] = 0
+    raid['players'] = {}
+    fb.patch(f'/raid/', raid)
+
+if __name__ == "__main__":
+    print(raid_attack('200702104568987649'))

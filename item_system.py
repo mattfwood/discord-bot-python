@@ -1,8 +1,6 @@
 import string
 from point_system import find_player
-from firebase import firebase
-fb = firebase.FirebaseApplication(
-    'https://discord-bot-db.firebaseio.com', None)
+from player import Player
 
 items = [
     {
@@ -73,34 +71,35 @@ def buy_item(discord_id: str, item_name: str) -> str:
     item_name_lowercase = item_name.lower()
     # Check if item name is valid
     item = validate_item(item_name_lowercase)
+    item_name = item['name']
 
     if item:
         # Check that user has enough points
-        player = find_player(discord_id)
-        if player['points'] >= (item['price'] * quantity):
+        # player = find_player(discord_id)
+        player = Player(discord_id)
+        if player.points >= (item['price'] * quantity):
             # add item to inventory
-            if 'items' in player:
+            if 'items' in vars(player):
                 # if the player already has this item
-                if item['name'] in player['items']:
+                if item['name'] in player.items:
                     # add one quantity
-                    item_name = item['name']
-                    player['items'][item['name']] += quantity
+                    item_name = item_name
+                    player.items[item_name] += quantity
                 else:
                     # otherwise set it to 1
-                    player['items'][item['name']] = quantity
-                # player['items'].append(item['name'])
+                    player.items[item_name] = quantity
             else:
-                player['items'] = {item['name']: quantity}
+                player.items = {item_name: quantity}
             # deduct price from points for each one bought
-            player['points'] -= item['price'] * quantity
+            player.points -= item['price'] * quantity
             # update user
-            fb.patch(f"/players/{player['discord_id']}", player)
-            return f"You bought {quantity} {item_name}(s)! Now you have {player['points']} point(s)."
+            player.update_player()
+            return f"You bought {quantity} {item_name}(s)! Now you have {player.points} point(s)."
         else:
-            return f"You can't afford {item_name} ({item['price']} points)!. You only have {player['points']}"
+            return f"You can't afford {item_name} ({item['price']} points)!. You only have {player.points}"
     else:
         return f"{item_name} isn't an item!"
 
 
 if __name__ == "__main__":
-    print(buy_item('GreatBearShark', 'Point Machine 2'))
+    print(buy_item('200702104568987649', 'Point Machine 2'))

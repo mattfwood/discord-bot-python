@@ -4,11 +4,8 @@ from firebase import firebase
 fb = firebase.FirebaseApplication(
     'https://discord-bot-db.firebaseio.com', None)
 
-def get_players():
-    return fb.get('/players', None) or {}
-
 def find_player(discord_id: str):
-    all_players = get_players()
+    all_players = fb.get('/players', None) or {}
     # Find or create player from discord_id
     if discord_id in all_players:
         return all_players[discord_id]
@@ -47,4 +44,5 @@ class Player:
         return item_name in self.items
 
     def delete_player(self):
+        """Mostly used for test teardown"""
         fb.delete(f'/players/{self.discord_id}', None)

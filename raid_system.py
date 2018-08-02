@@ -7,6 +7,8 @@ from combat_system import random_encounter, get_reward
 fb = firebase.FirebaseApplication(
     'https://discord-bot-db.firebaseio.com', None)
 
+def update_raid(raid):
+    fb.patch(f'/raid/', raid)
 
 def raid_fund(amount, discord_id):
     raid = fb.get('/raid', None)

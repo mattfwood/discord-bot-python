@@ -1,13 +1,6 @@
 import pytest
 from time import time
-from player import Player
-
-@pytest.fixture(scope="module")
-def smtp_connection():
-    yield smtp_connection  # provide the fixture value
-    print("teardown smtp")
-    player = Player('test-player')
-    player.delete_player()
+from .context import Player
 
 def test_create_player():
     player = Player('test-player')
@@ -23,6 +16,18 @@ def test_update_points():
 
 def test_add_item():
     player = Player('test-player')
+    assert player.has_item('Nightmare Sword') is False
     player.items['Nightmare Sword'] = 1
     player.update_player()
+    assert player.has_item('Nightmare Sword') is True
     assert 'Nightmare Sword' in player.items
+    assert player.items['Nightmare Sword'] == 1
+
+def test_increment_item():
+    player = Player('test-player')
+    assert 'Nightmare Sword' in player.items
+    assert player.has_item('Nightmare Sword') is True
+    player.items['Nightmare Sword'] += 1
+    player.update_player()
+    assert player.items['Nightmare Sword'] == 2
+

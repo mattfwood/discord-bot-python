@@ -1,3 +1,4 @@
+from time import time
 from firebase import firebase
 
 fb = firebase.FirebaseApplication(
@@ -17,7 +18,7 @@ def find_player(discord_id: str):
             'discord_id': discord_id,
             'points': 1,
             'last_updated': int(current_minutes),
-            'items': []
+            'items': {}
         }
         fb.patch(f'/players/{discord_id}', new_player)
         return new_player
@@ -25,7 +26,8 @@ def find_player(discord_id: str):
 class Player:
     def __init__(self, discord_id):
         player = find_player(discord_id)
-        self.items = player['items'] or {}
+        items = player['items'] if 'items' in player else {}
+        self.items = items
         self.points = player['points']
         self.discord_id = player['discord_id']
         self.last_updated = player['last_updated']
@@ -43,3 +45,6 @@ class Player:
 
     def has_item(self, item_name):
         return item_name in self.items
+
+    def delete_player(self):
+        fb.delete(f'/players/{self.discord_id}', None)

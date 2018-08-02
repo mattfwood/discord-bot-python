@@ -13,6 +13,7 @@ raven = "*"
 "flake8" = "*"
 "flake8-mypy" = "*"
 mypy = "*"
+pytest-watch = "*"
 
 [dev-packages]
 "autopep8" = "*"

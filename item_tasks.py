@@ -16,7 +16,7 @@ def add_point_task():
         if 'Point Machine' in player['items']:
             print(player['items']['Point Machine'])
             point_amount = player['items']['Point Machine'] * 2
-            player_message = f"Giving {point_amount} points to @<{player['discord_id']}>"
+            player_message = f"Giving {point_amount} points to <@{player['discord_id']}>"
             print(player_message)
             point_announcement.append(player_message)
             new_total = player['points'] + point_amount

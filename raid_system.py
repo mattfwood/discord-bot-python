@@ -122,6 +122,7 @@ def raid_win(combat_text, raid):
 
 def raid_loss(combat_text, raid):
     combat_text.append('All raid members have died! The raid has ended.')
+    raid_reset(raid)
     return '\n'.join(combat_text)
 
 def raid_reset(raid):

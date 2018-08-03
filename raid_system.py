@@ -81,6 +81,11 @@ def raid_attack(discord_id):
 
         # Deal damage to player
         boss_damage = randint(1, 10)
+        if 'Tortellini Armor' in player.items:
+            boss_damage = 6 if boss_damage > 6
+            # TODO: Add combat text line?
+            combat_text.append("You blocked the boss's strong attack and only took **6**")
+
         raid['players'][discord_id] -= boss_damage
 
         player_dead = raid['players'][discord_id] <= 0

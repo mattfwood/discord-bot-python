@@ -1,4 +1,5 @@
 from firebase import firebase
+from player import Player
 from point_system import update_points
 from announcement import make_announcement
 fb = firebase.FirebaseApplication(
@@ -11,6 +12,7 @@ def add_point_task():
     point incrementing items and give them that many points
     """
     players = fb.get('/players', None)
+    print(players)
     point_announcement = []
     for key, player in players.items():
         if 'Point Machine' in player['items']:

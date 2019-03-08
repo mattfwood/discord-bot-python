@@ -3,13 +3,13 @@ import discord
 import asyncio
 import time
 from combat_system import random_encounter
-from firebase import firebase
 
 client = discord.Client()
 
 
 def make_announcement(message, channel_name='general'):
     try:
+
         @client.event
         async def on_ready():
             print('Sending Announcement')
@@ -27,4 +27,6 @@ def make_announcement(message, channel_name='general'):
 
 
 if __name__ == '__main__':
-    make_announcement('@everyone New items have appeared in the shop...', channel_name='general')
+    make_announcement(
+        '@everyone New items have appeared in the shop...', channel_name='general'
+    )

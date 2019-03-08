@@ -1,14 +1,17 @@
 from random import choice, randint
 from time import time
-from firebase import firebase
+from firebase_helper import fb
+
+# from firebase import firebase
 from player import Player
 
-fb = firebase.FirebaseApplication(
-    'https://discord-bot-db.firebaseio.com', None)
+# fb = firebase.FirebaseApplication(
+#     'https://discord-bot-db.firebaseio.com', None)
 
 
 def get_players():
     return fb.get('/players', None) or {}
+
 
 def find_player(discord_id: str):
     all_players = get_players()
@@ -21,9 +24,9 @@ def find_player(discord_id: str):
             'discord_id': discord_id,
             'points': 1,
             'last_updated': int(current_minutes),
-            'items': []
+            'items': [],
         }
-        fb.patch(f'/players/{discord_id}', new_player)
+        fb.update(f'/players/{discord_id}', new_player)
         return new_player
 
 
@@ -36,9 +39,9 @@ def add_user(discord_id: str) -> str:
         'discord_id': discord_id,
         'points': 1,
         'last_updated': int(current_minutes),
-        'items': []
+        'items': [],
     }
-    fb.patch(f'/players/{discord_id}', new_player)
+    fb.update(f'/players/{discord_id}', new_player)
     return f'You gave {discord_id} one good boy point! Now they have {1}.'
 
 
@@ -52,8 +55,8 @@ def update_points(player, value: int, cooldown: bool = False) -> None:
     player['points'] = value
     if cooldown:
         current_minutes = time() / 60
-        player['last_updated'] = (current_minutes)
-    fb.patch(f"/players/{player['discord_id']}", player)
+        player['last_updated'] = current_minutes
+    fb.update(f"/players/{player['discord_id']}", player)
 
 
 def add_point(discord_id: str) -> str:
@@ -67,8 +70,8 @@ def add_point(discord_id: str) -> str:
             # set point cooldown as well
             update_points(player, new_total, cooldown=True)
 
-            player['last_updated'] = (current_minutes)
-            fb.patch(f'/players/{discord_id}', player)
+            player['last_updated'] = current_minutes
+            fb.update(f'/players/{discord_id}', player)
             return f"You gave <@{player['discord_id']}> one good boy point! Now they have {new_total}."
         else:
             time_diff = int(current_minutes - player['last_updated'])
@@ -113,12 +116,17 @@ def flip_coin(amount: int, player_name: str) -> str:
             # lose amount
             player.update_points(-amount)
             insult = choice(
-                ['stinky loser',
-                 'honking goose',
-                 'squawking duck',
-                 'unbelievable fool',
-                 'little baby'])
-            return f'You {insult}. You lost {amount} points! Now you have {player.points}.'
+                [
+                    'stinky loser',
+                    'honking goose',
+                    'squawking duck',
+                    'unbelievable fool',
+                    'little baby',
+                ]
+            )
+            return (
+                f'You {insult}. You lost {amount} points! Now you have {player.points}.'
+            )
     else:
         if amount < 0:
             return "You can't bet negative points!"
@@ -130,6 +138,7 @@ def bet_total(discord_id, half=False):
     player = Player(discord_id)
     total_points = player.points / 2 if half else player.points
     return flip_coin(total_points, discord_id)
+
 
 if __name__ == "__main__":
     print(flip_coin(1, '199772341679554561'))

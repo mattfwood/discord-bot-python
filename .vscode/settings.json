@@ -1,6 +1,4 @@
 {
-  "python.linting.flake8Enabled": true,
-  "python.linting.pylintEnabled": false,
-  "python.pythonPath": "/Users/matt-wood/.local/share/virtualenvs/discord-bot-T1Hl3T2U/bin/python",
+  "python.pythonPath": "/Users/mwood/.local/share/virtualenvs/discord-bot-Q_KgET-G/bin/python",
   "python.venvPath": "/Users/matt-wood/.local/share/virtualenvs/discord-bot-T1Hl3T2U/bin/activate"
 }

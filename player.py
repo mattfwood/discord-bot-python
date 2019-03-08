@@ -1,8 +1,10 @@
 from time import time
-from firebase import firebase
+from firebase_helper import fb
 
-fb = firebase.FirebaseApplication(
-    'https://discord-bot-db.firebaseio.com', None)
+# import fb from firebase
+
+# fb = firebase.FirebaseApplication('https://discord-bot-db.firebaseio.com', None)
+
 
 def find_player(discord_id: str):
     all_players = fb.get('/players', None) or {}
@@ -15,10 +17,11 @@ def find_player(discord_id: str):
             'discord_id': discord_id,
             'points': 1,
             'last_updated': int(current_minutes),
-            'items': {}
+            'items': {},
         }
-        fb.patch(f'/players/{discord_id}', new_player)
+        fb.update(f'/players/{discord_id}', new_player)
         return new_player
+
 
 class Player:
     def __init__(self, discord_id):
@@ -28,13 +31,14 @@ class Player:
         self.points = player['points']
         self.discord_id = player['discord_id']
         self.last_updated = player['last_updated']
+        self.discord_name = player['discord_name']
 
     def check_points(self, value):
         return self.points > value
 
     def update_player(self):
         player = vars(self)
-        fb.patch(f'/players/{self.discord_id}', player)
+        fb.update(f'/players/{self.discord_id}', player)
 
     def update_points(self, amount):
         self.points += amount
@@ -46,3 +50,8 @@ class Player:
     def delete_player(self):
         """Mostly used for test teardown"""
         fb.delete(f'/players/{self.discord_id}', None)
+
+
+if __name__ == "__main__":
+    player = Player('200702104568987649')
+    player.update_points(50)

@@ -6,11 +6,11 @@ from combat_system import random_encounter
 from firebase import firebase
 from raven import Client
 
-fb = firebase.FirebaseApplication(
-    'https://discord-bot-db.firebaseio.com', None)
+fb = firebase.FirebaseApplication('https://discord-bot-db.firebaseio.com', None)
 
 client = discord.Client()
 start_time = time.time()
+
 
 @client.event
 async def on_ready():
@@ -24,7 +24,9 @@ async def on_ready():
     for channel in channels:
         if channel.name == 'combat':
             await client.send_message(channel, message)
-            await client.send_message(channel, 'Use `!attack` to try and roll higher than the enemy.')
+            await client.send_message(
+                channel, 'Use `!attack` to try and roll higher than the enemy.'
+            )
             encounter = enemy
             encounter['started_at'] = start_time
             encounter['attacked'] = []
@@ -36,5 +38,6 @@ async def on_ready():
             # Reset Encounters
             fb.delete(f'/encounters', None)
             client.close()
+
 
 client.run(os.getenv('DISCORD_TOKEN'))

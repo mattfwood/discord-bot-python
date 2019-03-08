@@ -6,8 +6,7 @@ from combat_system import random_encounter, get_reward
 from firebase import firebase
 from raven import Client
 
-fb = firebase.FirebaseApplication(
-    'https://discord-bot-db.firebaseio.com', None)
+fb = firebase.FirebaseApplication('https://discord-bot-db.firebaseio.com', None)
 
 client = discord.Client()
 start_time = time.time()
@@ -25,7 +24,10 @@ async def on_ready():
     for channel in channels:
         if channel.name == 'combat':
             await client.send_message(channel, message)
-            await client.send_message(channel, 'Use `!fight` to try and roll the highest attack against the enemy for the next 5 minutes.')
+            await client.send_message(
+                channel,
+                'Use `!fight` to try and roll the highest attack against the enemy for the next 5 minutes.',
+            )
             encounter = enemy
             encounter['started_at'] = start_time
             encounter['attacked'] = []
@@ -41,15 +43,21 @@ async def on_ready():
                     if attack is highest_attack:
                         winner = player
                         reward = get_reward(boss['health']) * 2
-                        await client.send_message(channel, f"<@{winner['discord_id']}> wins the boss fight with a score of {attack}! {winner} wins **{reward}** points!")
+                        await client.send_message(
+                            channel,
+                            f"<@{winner['discord_id']}> wins the boss fight with a score of {attack}! {winner} wins **{reward}** points!",
+                        )
                         fb.delete(f'/boss', None)
                         client.close()
                         return
             else:
-                message = 'You fools have failed to attack the boss, the bot is displeased.'
+                message = (
+                    'You fools have failed to attack the boss, the bot is displeased.'
+                )
                 await client.send_message(channel, message)
                 fb.delete(f'/boss', None)
                 client.close()
                 return
+
 
 client.run(os.getenv('DISCORD_TOKEN'))

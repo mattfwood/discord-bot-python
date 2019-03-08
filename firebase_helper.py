@@ -8,9 +8,6 @@ firebase_admin.initialize_app(
     cred, {'databaseURL': 'https://discord-bot-db.firebaseio.com'}
 )
 
-ref = db.reference('/players')
-# print(ref.get())
-
 
 class fb:
     def get(path, data=None):

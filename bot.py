@@ -5,7 +5,8 @@ from raven import Client
 from show_commands import show_commands
 
 raven_client = Client(
-    'https://3a4591b085414cf4853854b0dd92348a:21dead98a66e405494a4cb328f530c00@sentry.io/1250949')
+    'https://3a4591b085414cf4853854b0dd92348a:21dead98a66e405494a4cb328f530c00@sentry.io/1250949'
+)
 
 client = discord.Client()
 

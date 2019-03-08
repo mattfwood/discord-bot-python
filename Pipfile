@@ -19,6 +19,7 @@ firebase-admin = "*"
 [dev-packages]
 "autopep8" = "*"
 pylint = "*"
+black = "*"
 
 [requires]
 python_version = "3.6.8"

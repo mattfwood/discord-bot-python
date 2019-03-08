@@ -4,7 +4,8 @@ import asyncio
 import time
 from combat_system import random_encounter, get_reward
 from firebase import firebase
-from raven import Client
+
+# from raven import Client
 
 fb = firebase.FirebaseApplication('https://discord-bot-db.firebaseio.com', None)
 

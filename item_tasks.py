@@ -1,10 +1,6 @@
 from firebase_helper import fb
-
-# from player import Player
 from point_system import update_points
 from announcement import make_announcement
-
-# fb = firebase.FirebaseApplication('https://discord-bot-db.firebaseio.com', None)
 
 
 def add_point_task():

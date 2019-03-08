@@ -1,12 +1,7 @@
 from random import choice, randint
 from time import time
 from firebase_helper import fb
-
-# from firebase import firebase
 from player import Player
-
-# fb = firebase.FirebaseApplication(
-#     'https://discord-bot-db.firebaseio.com', None)
 
 
 def get_players():

@@ -4,11 +4,12 @@ from player import Player
 from point_system import update_points, find_player
 from combat_system import random_encounter, get_reward
 
-fb = firebase.FirebaseApplication(
-    'https://discord-bot-db.firebaseio.com', None)
+fb = firebase.FirebaseApplication('https://discord-bot-db.firebaseio.com', None)
+
 
 def update_raid(raid):
     fb.patch(f'/raid/', raid)
+
 
 def raid_fund(amount, discord_id):
     raid = fb.get('/raid', None)
@@ -30,11 +31,7 @@ def raid_fund(amount, discord_id):
             return start_raid()
     else:
         # Create raid
-        new_raid = {
-            'fund': amount,
-            'players': [discord_id],
-            'active': False,
-        }
+        new_raid = {'fund': amount, 'players': [discord_id], 'active': False}
         fb.patch(f'/raid/', new_raid)
         return f'You started a new raid fund with {amount} points ({1000 - amount} remaining to start)'
 
@@ -47,6 +44,7 @@ def start_raid():
     raid['boss']['health'] = 100
     fb.patch(f'/raid/', raid)
     return 'Raid has started! Take turns attacking to try and defeat the boss.'
+
 
 def raid_attack(discord_id):
     raid = fb.get('/raid', None)
@@ -71,7 +69,9 @@ def raid_attack(discord_id):
         else:
             raid['boss']['health'] -= damage
 
-        combat_text.append(f"You dealt **{damage}** to {raid['boss']['name']}! ({raid['boss']['health']} HP left)")
+        combat_text.append(
+            f"You dealt **{damage}** to {raid['boss']['name']}! ({raid['boss']['health']} HP left)"
+        )
 
         # Check if boss is dead
         boss_dead = raid['boss']['health'] <= 0
@@ -84,7 +84,9 @@ def raid_attack(discord_id):
         if 'Tortellini Armor' in player.items:
             boss_damage = 6 if boss_damage > 6 else boss_damage
             # TODO: Add combat text line?
-            combat_text.append("You blocked the boss's strong attack and only took **6**")
+            combat_text.append(
+                "You blocked the boss's strong attack and only took **6**"
+            )
 
         raid['players'][discord_id] -= boss_damage
 
@@ -92,9 +94,13 @@ def raid_attack(discord_id):
 
         # Check that player is still alive
         if player_dead:
-            combat_text.append(f"{raid['boss']['name']} dealt **{boss_damage}** and killed you! Hopefully one of your raid members will avenge your death.")
+            combat_text.append(
+                f"{raid['boss']['name']} dealt **{boss_damage}** and killed you! Hopefully one of your raid members will avenge your death."
+            )
         else:
-            combat_text.append(f"{raid['boss']['name']} dealt **{boss_damage}** to you! You now have {raid['players'][discord_id]} HP.")
+            combat_text.append(
+                f"{raid['boss']['name']} dealt **{boss_damage}** to you! You now have {raid['players'][discord_id]} HP."
+            )
 
         # Check that any players are still alive
         no_remaining_players = max(raid['players'].values()) < 1
@@ -109,6 +115,7 @@ def raid_attack(discord_id):
     else:
         return "There isn't an active raid."
 
+
 def raid_win(combat_text, raid):
     reward = get_reward(500)
     player_count = len(raid['players'])
@@ -121,14 +128,18 @@ def raid_win(combat_text, raid):
         new_total = player['points'] + player_reward
         update_points(player, new_total)
 
-    combat_text.append(f"You've defeated the raid boss! All players are awarded {player_reward} points!")
+    combat_text.append(
+        f"You've defeated the raid boss! All players are awarded {player_reward} points!"
+    )
     raid_reset(raid)
     return '\n'.join(combat_text)
+
 
 def raid_loss(combat_text, raid):
     combat_text.append('All raid members have died! The raid has ended.')
     raid_reset(raid)
     return '\n'.join(combat_text)
+
 
 def raid_reset(raid):
     raid['boss'] = {}
@@ -136,6 +147,7 @@ def raid_reset(raid):
     raid['fund'] = 0
     raid['players'] = {}
     fb.patch(f'/raid/', raid)
+
 
 if __name__ == "__main__":
     print(raid_attack('200702104568987649'))

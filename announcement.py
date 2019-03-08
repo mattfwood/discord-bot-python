@@ -1,8 +1,5 @@
 import os
 import discord
-import asyncio
-import time
-from combat_system import random_encounter
 
 client = discord.Client()
 

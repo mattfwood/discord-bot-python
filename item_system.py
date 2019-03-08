@@ -6,12 +6,12 @@ items = [
     {
         'name': 'Good Boy Belt',
         'description': 'Prevents you from going under 10 points',
-        'price': 50
+        'price': 50,
     },
     {
         'name': 'Point Machine',
         'description': 'Generates one good boy point every 10 minutes',
-        'price': 100
+        'price': 100,
     },
     {
         'name': 'Loaded Dice',
@@ -26,23 +26,15 @@ items = [
     {
         'name': 'Nightmare Sword',
         'description': 'Get +10 damage to your rolls. Made from real nightmares.',
-        'price': 1000
+        'price': 1000,
     },
     {
         'name': 'Second Sword',
         'description': 'Get two attempts when attacking a boss.',
-        'price': 2500
+        'price': 2500,
     },
-    {
-        'name': 'Skateboard',
-        'description': 'Holy shit',
-        'price': 5000
-    },
-    {
-        'name': 'Plate of Spaghetti',
-        'description': "Your One Weakness.",
-        'price': 10000
-    }
+    {'name': 'Skateboard', 'description': 'Holy shit', 'price': 5000},
+    {'name': 'Plate of Spaghetti', 'description': "Your One Weakness.", 'price': 10000},
 ]
 
 

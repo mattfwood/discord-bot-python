@@ -1,10 +1,6 @@
 from time import time
 from firebase_helper import fb
 
-# import fb from firebase
-
-# fb = firebase.FirebaseApplication('https://discord-bot-db.firebaseio.com', None)
-
 
 def find_player(discord_id: str):
     all_players = fb.get('/players', None) or {}

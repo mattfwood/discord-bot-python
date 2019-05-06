@@ -38,6 +38,12 @@ class Player:
 
     def update_points(self, amount):
         self.points += amount
+
+        # If the user's new value is less than 10
+        if 'Good Boy Belt' in self.items and self.points < 10:
+            # Reset it to 10
+            self.points = 10
+
         self.update_player()
 
     def has_item(self, item_name):

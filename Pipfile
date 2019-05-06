@@ -10,16 +10,9 @@ python-dotenv = "*"
 python-firebase = "*"
 pytest = "*"
 raven = "*"
-"flake8" = "*"
-"flake8-mypy" = "*"
 mypy = "*"
 pytest-watch = "*"
 firebase-admin = "*"
-
-[dev-packages]
-"autopep8" = "*"
-pylint = "*"
-black = "*"
 
 [requires]
 python_version = "3.6.8"

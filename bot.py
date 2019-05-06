@@ -36,6 +36,9 @@ async def on_message(message):
         # get command name
         command = message.content.split(' ')[0][1:] or ''
 
+        if len(command) is 1 or len(command.strip('!')) is 0:
+            return
+
         # get text after command
         text = message.content.split(command)[1].strip() or ''
 

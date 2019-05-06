@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-"discord.py" = "*"
+"discord.py" = "==0.16.12"
 requests = "*"
 python-dotenv = "*"
 python-firebase = "*"

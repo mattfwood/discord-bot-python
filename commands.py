@@ -46,7 +46,7 @@ def inventory(user_input, message) -> str:
 def points(user_input, message) -> str:
     """Get your current number of points"""
     player = Player(message.author.id)
-    return f"You have **{player['points']}** points."
+    return f"You have **{player.points}** points."
 
 
 def goodboypoint(user_input, message) -> str:

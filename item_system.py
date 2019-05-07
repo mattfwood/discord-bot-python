@@ -93,7 +93,7 @@ def buy_item(discord_id: str, item_name: str) -> str:
             player.update_player()
             return f"You bought {quantity} {item_name}(s)! Now you have {player.points} point(s)."
         else:
-            return f"You can't afford {item_name} ({item['price']} points)!. You only have {player.points}"
+            return f"You can't afford {item_name} ({item['price']} points)! You only have {player.points}"
     else:
         return f"{item_name} isn't an item!"
 

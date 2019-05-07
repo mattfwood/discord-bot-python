@@ -67,7 +67,7 @@ async def on_message(message):
         print('EXCEPTION:')
         print(repr(e))
         # Catch errors that are invalid commands
-        if command not in commands.__dict__ and command is not 'commands':
+        if command not in commands.__dict__ and command != 'commands':
             reply = f"<@{message.author.id}> '{command}' isn't a command, dummy"
             await client.send_message(message.channel, reply)
         else:

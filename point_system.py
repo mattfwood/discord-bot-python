@@ -91,6 +91,7 @@ def point_available(player) -> bool:
 def flip_coin(amount: int, player_name: str) -> str:
     # player = find_player(player_name)
     player = Player(player_name)
+
     # If the user has enough points to bet
     if 0 <= amount <= player.points:
         if 'Loaded Dice' in player.items:

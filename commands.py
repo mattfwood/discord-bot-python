@@ -6,6 +6,7 @@ from point_system import add_point, flip_coin, find_player, bet_total
 from item_system import items, buy_item
 from combat_system import attack_enemy, attack_boss
 from raid_system import raid_fund, raid_attack
+from player import Player
 
 
 def decide(user_input: str, message) -> str:
@@ -30,9 +31,9 @@ def reddit(user_input, message):
 
 def inventory(user_input, message) -> str:
     """List the items in your inventory"""
-    player = find_player(message.author.id)
+    player = Player(message.author.id)
     # player = find_player('GreatBearShark')
-    player_items = player['items']
+    player_items = player.items
     item_list = []
     for item in player_items:
         # print(item)
@@ -44,7 +45,7 @@ def inventory(user_input, message) -> str:
 
 def points(user_input, message) -> str:
     """Get your current number of points"""
-    player = find_player(message.author.id)
+    player = Player(message.author.id)
     return f"You have **{player['points']}** points."
 
 

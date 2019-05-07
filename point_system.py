@@ -118,6 +118,8 @@ def flip_coin(amount: int, player_name: str) -> str:
                     'squawking duck',
                     'unbelievable fool',
                     'little baby',
+                    'beautiful fool',
+                    'hard-boiled egghead',
                 ]
             )
             return (

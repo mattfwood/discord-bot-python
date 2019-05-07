@@ -4,8 +4,18 @@ import types
 
 def show_commands():
     command_list = ['__Commands:__']
-    ignore_imports = ['random', 'requests', 'pdb', 'json', 'add_point',
-                      'flip_coin', 'find_player', 'items', 'buy_item', 'attack_enemy']
+    ignore_imports = [
+        'random',
+        'requests',
+        'pdb',
+        'json',
+        'add_point',
+        'flip_coin',
+        'find_player',
+        'items',
+        'buy_item',
+        'attack_enemy',
+    ]
     for name, command in commands.__dict__.items():
         valid_name = name not in ignore_imports and '__' not in name
         not_built_in = isinstance(command, types.BuiltinFunctionType) is False

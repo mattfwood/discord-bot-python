@@ -27,7 +27,7 @@ async def on_message(message):
             return
 
         # only handle non-blank messages that start with the command symbol
-        if len(message.content) == 0 or message.content[0] !== '!':
+        if len(message.content) == 0 or message.content[0] != '!':
             return
 
         message_sender = message.author
@@ -36,7 +36,7 @@ async def on_message(message):
         # get command name
         command = message.content.split(' ')[0][1:] or ''
 
-        if len(command) is 1 or len(command.strip('!')) is 0:
+        if len(command) == 1 or len(command.strip('!')) == 0:
             return
 
         # get text after command

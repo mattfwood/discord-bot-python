@@ -27,7 +27,7 @@ class Player:
         self.points = player['points']
         self.discord_id = player['discord_id']
         self.last_updated = player['last_updated']
-        self.discord_name = player['discord_name']
+        # self.discord_name = player['discord_name']
 
     def check_points(self, value):
         return self.points > value

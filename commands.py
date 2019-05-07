@@ -19,7 +19,8 @@ def reddit(user_input, message):
     try:
         res = requests.get(
             f'https://www.reddit.com/r/{user_input}/hot.json?limit=20',
-            headers={'User-agent': 'Bone-Bot-Discord'})
+            headers={'User-agent': 'Bone-Bot-Discord'},
+        )
         json = res.json()
         random_url = random.choice(json['data']['children'])['data']['url']
         return random_url
@@ -35,8 +36,7 @@ def inventory(user_input, message) -> str:
     item_list = []
     for item in player_items:
         # print(item)
-        item_list.append(
-            f"__{item.strip()}__: {player_items[item]}")
+        item_list.append(f"__{item.strip()}__: {player_items[item]}")
 
     output = '\n'.join(item_list)
     return f"**\n Inventory:**\n{output}"
@@ -103,6 +103,7 @@ def fight(user_input, message) -> str:
     message = attack_boss(message.author.id)
     return message
 
+
 def raid(user_input, message):
     """{Amount} Put a certain number of points toward the raid fund"""
     print(user_input)
@@ -117,10 +118,12 @@ def raid(user_input, message):
     else:
         return raid_attack(message.author.id)
 
+
 # def attack_raid(user_input, message):
 #     """Attack the current raid boss"""
 #     message = raid_attack(message.author.id)
 #     return message
+
 
 def zalgo(user_input, message) -> str:
     """Uh oh"""

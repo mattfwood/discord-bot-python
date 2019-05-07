@@ -37,7 +37,7 @@ def add_user(discord_id: str) -> str:
         'items': [],
     }
     fb.update(f'/players/{discord_id}', new_player)
-    return f'You gave {discord_id} one good boy point! Now they have {1}.'
+    return f'You gave <@{discord_id}> one good boy point! Now they have {1}.'
 
 
 def update_points(player, value: int, cooldown: bool = False) -> None:

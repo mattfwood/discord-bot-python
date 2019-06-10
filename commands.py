@@ -23,8 +23,9 @@ def reddit(user_input, message):
             headers={'User-agent': 'Bone-Bot-Discord'},
         )
         json = res.json()
-        random_url = random.choice(json['data']['children'])['data']['url']
-        return random_url
+        random_post = random.choice(json['data']['children'])['data']
+        # random_url = random.choice(json['data']['children'])['data']['url']
+        return f'{random_post['title']} \n {random_post['url']}'
     except IndexError:
         return 'Subreddit not found'
 

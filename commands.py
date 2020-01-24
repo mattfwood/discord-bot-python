@@ -25,7 +25,7 @@ def reddit(user_input, message):
         json = res.json()
         random_post = random.choice(json['data']['children'])['data']
         # random_url = random.choice(json['data']['children'])['data']['url']
-        return f'{random_post['title']} \n {random_post['url']}'
+        return f"{random_post['title']} \n {random_post['url']}"
     except IndexError:
         return 'Subreddit not found'
 
